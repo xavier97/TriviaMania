@@ -1,6 +1,6 @@
-﻿// WARNING
+// WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -11,11 +11,46 @@ using UIKit;
 
 namespace MobileAppClass
 {
-    [Register("MyViewController")]
+    [Register ("MyViewController")]
     partial class MyViewController
     {
-        void ReleaseDesignerOutlets()
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel HighScoreLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel LogoLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton NewGameButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton ViewQuestionsButton { get; set; }
+
+        void ReleaseDesignerOutlets ()
         {
+            if (HighScoreLabel != null) {
+                HighScoreLabel.Dispose ();
+                HighScoreLabel = null;
+            }
+
+            if (LogoLabel != null) {
+                LogoLabel.Dispose ();
+                LogoLabel = null;
+            }
+
+            if (NewGameButton != null) {
+                NewGameButton.Dispose ();
+                NewGameButton = null;
+            }
+
+            if (ViewQuestionsButton != null) {
+                ViewQuestionsButton.Dispose ();
+                ViewQuestionsButton = null;
+            }
         }
     }
 }
