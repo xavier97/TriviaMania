@@ -13,8 +13,21 @@ namespace MobileAppClass
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Perform any additional setup after loading the view, typically from a nib.
+            
+			//Add navigation bar title
+			NavigationItem.Title = "Trivia Mania";
+			NavigationController.NavigationBar.BackgroundColor = UIColor.Purple;
+
         }
+
+		partial void ViewQuestionsButton_TouchUpInside(UIButton sender)
+		{
+			//create a QuestionsViewController
+			QuestionsViewController QuestionsVC = new QuestionsViewController();
+
+			//display QuestionsVC
+			NavigationController.PushViewController(QuestionsVC, true);
+		}
 
         public override void DidReceiveMemoryWarning()
         {

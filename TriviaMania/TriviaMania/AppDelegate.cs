@@ -23,8 +23,12 @@ namespace MobileAppClass
 
               //set root view controller
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+			//Create Navigation Controller
+			UINavigationController navCtrl = new UINavigationController(new MyViewController());
+			Window.RootViewController = navCtrl; 
     
-            Window.RootViewController = new MyViewController();
+            //Window.RootViewController = new MyViewController();
 
             Window.MakeKeyAndVisible();
 
