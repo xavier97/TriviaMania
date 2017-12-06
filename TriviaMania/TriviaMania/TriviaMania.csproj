@@ -105,10 +105,13 @@
     <Compile Include="QuestionsViewController.designer.cs">
       <DependentUpon>QuestionsViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="TriviaViewController1.designer.cs" />
+    <Compile Include="TriviaViewController1.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MyViewController.xib" />
     <InterfaceDefinition Include="QuestionsViewController.xib" />
+    <InterfaceDefinition Include="TriviaViewController1.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

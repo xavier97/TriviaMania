@@ -21,6 +21,11 @@ namespace MobileAppClass
             base.DidReceiveMemoryWarning();
             // Release any cached data, images, etc that aren't in use.
         }
+
+        partial void NewGameButton_TouchUpInside(UIButton sender)
+        {
+            
+        }
     }
 }
 

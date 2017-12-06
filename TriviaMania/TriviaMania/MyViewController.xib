@@ -48,6 +48,9 @@
                         <constraint id="331" firstItem="152" firstAttribute="width" constant="215"/>
                         <constraint id="332" firstItem="152" firstAttribute="height" constant="40"/>
                     </constraints>
+                    <connections>
+                        <action selector="NewGameButton_TouchUpInside:" destination="-1" id="502" eventType="touchUpInside"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="154" translatesAutoresizingMaskIntoConstraints="NO">
                     <rect key="frame" x="192" y="526" width="215" height="40"/>
