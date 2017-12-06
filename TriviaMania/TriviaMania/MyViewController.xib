@@ -61,6 +61,9 @@
                         <constraint id="334" firstItem="154" firstAttribute="width" constant="215"/>
                         <constraint id="335" firstItem="154" firstAttribute="height" constant="40"/>
                     </constraints>
+                    <connections>
+                        <action selector="ViewQuestionsButton_TouchUpInside:" destination="-1" id="339" eventType="touchUpInside"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
