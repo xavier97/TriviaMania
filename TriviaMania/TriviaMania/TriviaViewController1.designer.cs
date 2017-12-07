@@ -14,8 +14,16 @@ namespace MobileAppClass
     [Register ("TriviaViewController1")]
     partial class TriviaViewController1
     {
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel QuestionLabel { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
+            if (QuestionLabel != null) {
+                QuestionLabel.Dispose ();
+                QuestionLabel = null;
+            }
         }
     }
 }

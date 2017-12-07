@@ -105,8 +105,10 @@
     <Compile Include="QuestionsViewController.designer.cs">
       <DependentUpon>QuestionsViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="TriviaViewController1.designer.cs" />
     <Compile Include="TriviaViewController1.cs" />
+    <Compile Include="TriviaViewController1.designer.cs">
+      <DependentUpon>TriviaViewController1.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MyViewController.xib" />

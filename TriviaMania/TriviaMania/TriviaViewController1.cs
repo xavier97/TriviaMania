@@ -1,6 +1,7 @@
 ﻿using System;
 
 using UIKit;
+using CoreGraphics;
 
 namespace MobileAppClass
 {
@@ -14,6 +15,17 @@ namespace MobileAppClass
         {
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
+
+            UIEdgeInsets questionLabelMargins;
+            questionLabelMargins.Bottom = 0.5f;
+            questionLabelMargins.Left = 10f;
+            questionLabelMargins.Right = 10f;
+            questionLabelMargins.Top = 0.5f;
+
+            QuestionLabel.Layer.BorderWidth = 3.5f;
+
+
+            //QuestionLabel.Layer.BorderColor = 
         }
 
         public override void DidReceiveMemoryWarning()

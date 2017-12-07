@@ -20,8 +20,8 @@ namespace MobileAppClass
 
         }
 
-		partial void ViewQuestionsButton_TouchUpInside(UIButton sender)
-		{
+        void ViewQuestionsButton_TouchUpInside(UIButton sender)
+        {
 			//create a QuestionsViewController
 			QuestionsViewController QuestionsVC = new QuestionsViewController();
 
@@ -29,16 +29,21 @@ namespace MobileAppClass
 			NavigationController.PushViewController(QuestionsVC, true);
 		}
 
+        partial void NewGameButton_TouchUpInside(UIButton sender)
+        {
+            // Create a TriviaViewController1
+            TriviaViewController1 TriviaVC = new TriviaViewController1();
+
+            // Display TriviaVC
+            NavigationController.PushViewController(TriviaVC, true);
+        }
+
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
             // Release any cached data, images, etc that aren't in use.
         }
 
-        partial void NewGameButton_TouchUpInside(UIButton sender)
-        {
-            
-        }
     }
 }
 
