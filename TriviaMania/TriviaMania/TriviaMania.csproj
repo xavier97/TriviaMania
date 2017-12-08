@@ -109,6 +109,7 @@
     <Compile Include="TriviaViewController1.designer.cs">
       <DependentUpon>TriviaViewController1.cs</DependentUpon>
     </Compile>
+    <Compile Include="TriviaQuestionsRecord.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MyViewController.xib" />

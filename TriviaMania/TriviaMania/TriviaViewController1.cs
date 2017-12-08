@@ -46,7 +46,8 @@ namespace MobileAppClass
             timer.Start();
 
             // Progress Bar Details
-            QuestionTimer.Progress = 1;
+            QuestionTimerProgressBar.Progress = 5; // TODO: This is for 5 seconds
+
             //int time = 1;
 
         }
@@ -54,9 +55,6 @@ namespace MobileAppClass
         void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             InvokeOnMainThread(() => {
-
-                // TODO: Add progress bar details
-                QuestionTimer.Progress = QuestionTimer.Progress - 10;
 
                 // Popup alert that the timer is done
                 UIAlertView timeAlert = new UIAlertView()
@@ -72,8 +70,9 @@ namespace MobileAppClass
                 {
                     this.NavigationController.PopViewController(true);
                 };
-
             });
+
+            timer.Stop();
         }
 
         public override void ViewDidDisappear(bool animated)
