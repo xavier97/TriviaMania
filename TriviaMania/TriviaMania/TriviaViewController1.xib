@@ -32,6 +32,12 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="10" height="-1"/>
+                    <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute keyPath="layer.cornerRadius" type="number">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2473">
                     <rect key="frame" x="8" y="354" width="150" height="65"/>
@@ -99,7 +105,7 @@
                     <rect key="frame" x="8" y="322" width="304" height="2"/>
                 </progressView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.72941176470588232" green="0.45490196078431372" blue="0.99215686274509807" alpha="1"/>
             <constraints>
                 <constraint firstItem="151" firstAttribute="top" secondItem="2" secondAttribute="top" constant="88" id="927"/>
                 <constraint firstItem="151" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" constant="3" id="949"/>
