@@ -20,10 +20,10 @@ namespace MobileAppClass
 
         }
 
-        void ViewQuestionsButton_TouchUpInside(UIButton sender)
+        partial void ViewQuestionsButton_TouchUpInside(UIButton sender)
         {
 			//create a QuestionsViewController
-			QuestionsViewController QuestionsVC = new QuestionsViewController();
+            QuestionsViewController QuestionsVC = new QuestionsViewController();
 
 			//display QuestionsVC
 			NavigationController.PushViewController(QuestionsVC, true);

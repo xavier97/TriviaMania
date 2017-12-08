@@ -1,116 +1,121 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TriviaViewController1">
             <connections>
-                <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
                 <outlet property="QuestionLabel" destination="151" id="name-outlet-151"/>
+                <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
+                <outlet property="QuestionTimerProgressBar" destination="2487" id="name-outlet-2487"/>
+                <outlet property="GameStatusProgressBar" destination="2474" id="name-outlet-2474"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="2">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="151" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="10" textAlignment="natural">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="151">
                     <rect key="frame" x="14" y="88" width="298" height="201"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="298" id="971"/>
+                        <constraint firstAttribute="height" constant="201" id="993"/>
+                    </constraints>
+                    <string key="text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
-                    <string key="text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.</string>
                     <size key="shadowOffset" width="10" height="-1"/>
-                    <constraints>
-                        <constraint id="971" firstItem="151" firstAttribute="width" constant="298"/>
-                        <constraint id="993" firstItem="151" firstAttribute="height" constant="201"/>
-                    </constraints>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2473" translatesAutoresizingMaskIntoConstraints="NO">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2473">
                     <rect key="frame" x="8" y="354" width="150" height="65"/>
-                    <color key="backgroundColor" colorSpace="calibratedRGB" red="0.2" green="0.92549019607843142" blue="0.996078431372549" alpha="1"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="2492"/>
+                        <constraint firstAttribute="height" constant="65" id="2493"/>
+                    </constraints>
                     <state key="normal" title="Button"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute keyPath="layer.cornerRadius" type="number">
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <real key="value" value="20"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                    <constraints>
-                        <constraint id="2492" firstItem="2473" firstAttribute="width" constant="150"/>
-                        <constraint id="2493" firstItem="2473" firstAttribute="height" constant="65"/>
-                    </constraints>
                 </button>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2474" misplaced="YES" ambiguous="YES">
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2474">
                     <rect key="frame" x="11" y="541" width="298" height="2"/>
+                    <constraints>
+                        <constraint id="3267" firstItem="2474" firstAttribute="width" constant="298"/>
+                    </constraints>
                 </progressView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2484" translatesAutoresizingMaskIntoConstraints="NO">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2484">
                     <rect key="frame" x="166" y="354" width="150" height="65"/>
-                    <color key="backgroundColor" colorSpace="calibratedRGB" red="0.2" green="0.92549019607843142" blue="0.996078431372549" alpha="1"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="2496"/>
+                        <constraint firstAttribute="height" constant="65" id="2497"/>
+                    </constraints>
                     <state key="normal" title="Button"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute keyPath="layer.cornerRadius" type="number">
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <real key="value" value="20"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                    <constraints>
-                        <constraint id="2496" firstItem="2484" firstAttribute="width" constant="150"/>
-                        <constraint id="2497" firstItem="2484" firstAttribute="height" constant="65"/>
-                    </constraints>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2485" translatesAutoresizingMaskIntoConstraints="NO">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2485">
                     <rect key="frame" x="166" y="435" width="150" height="65"/>
-                    <color key="backgroundColor" colorSpace="calibratedRGB" red="0.2" green="0.92549019607843142" blue="0.996078431372549" alpha="1"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="2505"/>
+                        <constraint firstAttribute="height" constant="65" id="2506"/>
+                    </constraints>
                     <state key="normal" title="Button"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute keyPath="layer.cornerRadius" type="number">
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <real key="value" value="20"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                    <constraints>
-                        <constraint id="2505" firstItem="2485" firstAttribute="width" constant="150"/>
-                        <constraint id="2506" firstItem="2485" firstAttribute="height" constant="65"/>
-                    </constraints>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2486" translatesAutoresizingMaskIntoConstraints="NO">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2486">
                     <rect key="frame" x="8" y="435" width="150" height="65"/>
-                    <color key="backgroundColor" colorSpace="calibratedRGB" red="0.2" green="0.92549019607843142" blue="0.996078431372549" alpha="1"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="2500"/>
+                        <constraint firstAttribute="height" constant="65" id="2501"/>
+                    </constraints>
                     <state key="normal" title="Button"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute keyPath="layer.cornerRadius" type="number">
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <real key="value" value="20"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                    <constraints>
-                        <constraint id="2500" firstItem="2486" firstAttribute="width" constant="150"/>
-                        <constraint id="2501" firstItem="2486" firstAttribute="height" constant="65"/>
-                    </constraints>
                 </button>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2487">
                     <rect key="frame" x="8" y="322" width="304" height="2"/>
                 </progressView>
             </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint id="927" firstItem="151" firstAttribute="top" secondItem="2" secondAttribute="top" constant="88"/>
-                <constraint id="949" firstItem="151" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" constant="3"/>
-                <constraint id="2488" firstItem="2487" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
-                <constraint id="2489" firstItem="2487" firstAttribute="top" secondItem="151" secondAttribute="bottom" constant="33"/>
-                <constraint id="2490" firstItem="2487" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="8"/>
-                <constraint id="2491" firstItem="2473" firstAttribute="top" secondItem="2487" secondAttribute="bottom" constant="30"/>
-                <constraint id="2494" firstItem="2473" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="8"/>
-                <constraint id="2495" firstItem="2484" firstAttribute="leading" secondItem="2473" secondAttribute="trailing" constant="8"/>
-                <constraint id="2498" firstItem="2484" firstAttribute="top" secondItem="2487" secondAttribute="bottom" constant="30"/>
-                <constraint id="2499" firstItem="2486" firstAttribute="top" secondItem="2473" secondAttribute="bottom" constant="16"/>
-                <constraint id="2503" firstItem="2486" firstAttribute="centerX" secondItem="2473" secondAttribute="centerX"/>
-                <constraint id="2504" firstItem="2485" firstAttribute="centerX" secondItem="2484" secondAttribute="centerX"/>
-                <constraint id="2507" firstItem="2485" firstAttribute="top" secondItem="2484" secondAttribute="bottom" constant="16"/>
-                <constraint id="2508" firstItem="2474" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
-                <constraint id="2509" firstItem="2474" firstAttribute="top" secondItem="2486" secondAttribute="bottom" constant="41"/>
+                <constraint firstItem="151" firstAttribute="top" secondItem="2" secondAttribute="top" constant="88" id="927"/>
+                <constraint firstItem="151" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" constant="3" id="949"/>
+                <constraint firstItem="2487" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="2488"/>
+                <constraint firstItem="2487" firstAttribute="top" secondItem="151" secondAttribute="bottom" constant="33" id="2489"/>
+                <constraint firstItem="2487" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="8" id="2490"/>
+                <constraint firstItem="2473" firstAttribute="top" secondItem="2487" secondAttribute="bottom" constant="30" id="2491"/>
+                <constraint firstItem="2473" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="8" id="2494"/>
+                <constraint firstItem="2484" firstAttribute="leading" secondItem="2473" secondAttribute="trailing" constant="8" id="2495"/>
+                <constraint firstItem="2484" firstAttribute="top" secondItem="2487" secondAttribute="bottom" constant="30" id="2498"/>
+                <constraint firstItem="2486" firstAttribute="top" secondItem="2473" secondAttribute="bottom" constant="16" id="2499"/>
+                <constraint firstItem="2486" firstAttribute="centerX" secondItem="2473" secondAttribute="centerX" id="2503"/>
+                <constraint firstItem="2485" firstAttribute="centerX" secondItem="2484" secondAttribute="centerX" id="2504"/>
+                <constraint firstItem="2485" firstAttribute="top" secondItem="2484" secondAttribute="bottom" constant="16" id="2507"/>
+                <constraint firstItem="2474" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="2508"/>
+                <constraint firstItem="2474" firstAttribute="top" secondItem="2486" secondAttribute="bottom" constant="41" id="2509"/>
             </constraints>
             <point key="canvasLocation" x="32" y="28"/>
         </view>

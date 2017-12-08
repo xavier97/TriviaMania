@@ -16,13 +16,31 @@ namespace MobileAppClass
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIProgressView GameStatusProgressBar { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel QuestionLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIProgressView QuestionTimerProgressBar { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
+            if (GameStatusProgressBar != null) {
+                GameStatusProgressBar.Dispose ();
+                GameStatusProgressBar = null;
+            }
+
             if (QuestionLabel != null) {
                 QuestionLabel.Dispose ();
                 QuestionLabel = null;
+            }
+
+            if (QuestionTimerProgressBar != null) {
+                QuestionTimerProgressBar.Dispose ();
+                QuestionTimerProgressBar = null;
             }
         }
     }

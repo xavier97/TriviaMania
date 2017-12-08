@@ -34,6 +34,10 @@ namespace MobileAppClass
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void NewGameButton_TouchUpInside (UIKit.UIButton sender);
 
+        [Action ("ViewQuestionsButton_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void ViewQuestionsButton_TouchUpInside (UIKit.UIButton sender);
+
         void ReleaseDesignerOutlets ()
         {
             if (HighScoreLabel != null) {
