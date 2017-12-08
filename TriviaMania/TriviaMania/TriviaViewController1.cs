@@ -3,6 +3,7 @@
 using UIKit;
 using CoreGraphics;
 using System.Timers;
+using System.Threading;
 
 namespace MobileAppClass
 {
@@ -30,8 +31,15 @@ namespace MobileAppClass
 
             QuestionLabel.Layer.BorderWidth = 3.5f;
 
+            QuestionTimerProgressBar.Style = UIProgressViewStyle.Default;
 
             //QuestionLabel.Layer.BorderColor = 
+        }
+
+        class TimerExampleState
+        {
+            public int counter = 0;
+            public System.Threading.Timer tmr;
         }
 
         public override void ViewDidAppear(bool animated)
@@ -39,17 +47,36 @@ namespace MobileAppClass
             base.ViewDidAppear(animated);
 
             // Countdown Details
-            timer = new Timer();
+            timer = new System.Timers.Timer();
             timer.Interval = timeLeft;
             timer.Enabled = true;
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
 
+            #region progress bar details
+            TimerExampleState s = new TimerExampleState();
+
             // Progress Bar Details
             QuestionTimerProgressBar.Progress = 5; // TODO: This is for 5 seconds
 
+            // Create the delegate that invokes methods for the timer.
+            TimerCallback timerDelegate = new TimerCallback(CheckStatus);
+
+            // Create a timer that waits one second, then invokes every second.
+            System.Threading.Timer progressTimer = new System.Threading.Timer(timerDelegate, s, 1000, 1000);
+
+            // Keep a handle to the timer, so it can be disposed.
+            s.tmr = timer;
+
+            #endregion
+
             //int time = 1;
 
+        }
+
+        private void CheckStatus(object state)
+        {
+            throw new NotImplementedException();
         }
 
         void Timer_Elapsed(object sender, ElapsedEventArgs e)
