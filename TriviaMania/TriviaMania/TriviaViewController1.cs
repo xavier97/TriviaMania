@@ -3,14 +3,16 @@
 using UIKit;
 using CoreGraphics;
 using System.Timers;
-using System.Threading;
+//using System.Threading;
 
 namespace MobileAppClass
 {
     public partial class TriviaViewController1 : UIViewController
     {
         Timer timer;
-        readonly int timeLeft = 5000; // TODO: Change this to 15000 for 15 seconds when done testing
+        Timer timerProgression;
+        readonly int timeLeft = 15000; // TODO: Change this to 15000 for 15 seconds when done testing
+        readonly int progressTime = 1000;
         int score;
 
         public TriviaViewController1() : base("TriviaViewController1", null)
@@ -23,6 +25,7 @@ namespace MobileAppClass
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
 
+            // Question Label Setup
             UIEdgeInsets questionLabelMargins;
             questionLabelMargins.Bottom = 0.5f;
             questionLabelMargins.Left = 10f;
@@ -36,10 +39,22 @@ namespace MobileAppClass
             //QuestionLabel.Layer.BorderColor = 
         }
 
-        class TimerExampleState
+        public float DegreesToRadians(float degree)
         {
-            public int counter = 0;
-            public System.Threading.Timer tmr;
+            return ((float)((degree) * Math.PI / 180.0));
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            QuestionTimerProgressBar.SetProgress(15, true); // TODO: This is for 5 seconds. Make it for 15.
+            QuestionTimerProgressBar.ProgressTintColor = UIColor.White;
+
+            // Flip progress bar's fill direction
+            QuestionTimerProgressBar.Transform = CGAffineTransform.MakeRotation(DegreesToRadians(180f));
+            //QuestionTimerProgressBar.Transform = CGAffineTransform.MakeTranslation(1, -1);
+
         }
 
         public override void ViewDidAppear(bool animated)
@@ -54,29 +69,19 @@ namespace MobileAppClass
             timer.Start();
 
             #region progress bar details
-            TimerExampleState s = new TimerExampleState();
 
             // Progress Bar Details
-            QuestionTimerProgressBar.Progress = 5; // TODO: This is for 5 seconds
-
-            // Create the delegate that invokes methods for the timer.
-            TimerCallback timerDelegate = new TimerCallback(CheckStatus);
-
-            // Create a timer that waits one second, then invokes every second.
-            System.Threading.Timer progressTimer = new System.Threading.Timer(timerDelegate, s, 1000, 1000);
-
-            // Keep a handle to the timer, so it can be disposed.
-            s.tmr = timer;
+            timerProgression = new Timer();
+            timerProgression.Interval = progressTime;
+            timerProgression.Enabled = true;
+            timerProgression.Elapsed += (sender, e) => 
+            {
+                Console.WriteLine("hello");
+                QuestionTimerProgressBar.Progress -= 1f;
+            };
 
             #endregion
 
-            //int time = 1;
-
-        }
-
-        private void CheckStatus(object state)
-        {
-            throw new NotImplementedException();
         }
 
         void Timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -100,6 +105,7 @@ namespace MobileAppClass
             });
 
             timer.Stop();
+            timerProgression.Stop();
         }
 
         public override void ViewDidDisappear(bool animated)
