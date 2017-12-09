@@ -22,7 +22,7 @@ namespace MobileAppClass
 			falseQ2 = f2;
 			falseQ3 = f3;
 
-			QuestionID = question.Substring(0, 10) + answer.Substring(0,3) + GetRandomInt().ToString();
+			QuestionID = question.Substring(0, 10) + answer[0].ToString() + GetRandomInt().ToString();
 		}
 
 		public int GetRandomInt()
