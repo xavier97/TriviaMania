@@ -1,4 +1,6 @@
-﻿using Foundation;
+﻿using System;
+using System.IO;
+using Foundation;
 using UIKit;
 
 namespace MobileAppClass
@@ -9,6 +11,8 @@ namespace MobileAppClass
     public class AppDelegate : UIApplicationDelegate
     {
         // class-level declarations
+
+		public static string pathFile;
 
         public override UIWindow Window
         {
@@ -23,6 +27,10 @@ namespace MobileAppClass
 
               //set root view controller
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+			var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+			Console.WriteLine(path);
+			pathFile = Path.Combine(path, "TriviaQuestionsData.txt");
 
 			//Create Navigation Controller
 			UINavigationController navCtrl = new UINavigationController(new MyViewController());
