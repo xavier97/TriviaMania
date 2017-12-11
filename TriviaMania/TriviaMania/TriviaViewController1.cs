@@ -20,6 +20,11 @@ namespace MobileAppClass
             
         }
 
+        partial void AnswerButton1_TouchUpInside(UIButton sender)
+        {
+            
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -34,12 +39,12 @@ namespace MobileAppClass
 
             QuestionLabel.Layer.BorderWidth = 3.5f;
 
-            QuestionTimerProgressBar.Style = UIProgressViewStyle.Default;
+            #region making a random box the answer
+            #endregion
 
-            //QuestionLabel.Layer.BorderColor = 
         }
 
-        public float DegreesToRadians(float degree)
+        private float DegreesToRadians(float degree)
         {
             return ((float)((degree) * Math.PI / 180.0));
         }
@@ -111,6 +116,8 @@ namespace MobileAppClass
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
+
+            timer.Stop();
         }
 
         public override void DidReceiveMemoryWarning()
