@@ -33,8 +33,9 @@ namespace MobileAppClass
 
 			using (var streamwriter = new StreamWriter(AppDelegate.pathFile, false))
 			{
-				streamwriter.Write(myJson);
+				streamwriter.Write(myJson); 
 			}
+
 		}
 
 		public override void ViewWillAppear(bool animated)
@@ -42,7 +43,7 @@ namespace MobileAppClass
 			base.ViewWillAppear(animated);
 
 			//Create Tableview
-			QuestionsTableView.Source = new QuestionsViewController.QuestionsTableSource(this);
+			QuestionsTableView.Source = new QuestionsViewController.QuestionsTableSource(this, StarterQuestionsList);
 		}
 
 		public override void DidReceiveMemoryWarning()
@@ -55,15 +56,17 @@ namespace MobileAppClass
 
 		public class QuestionsTableSource : UITableViewSource  //Inherit UITableViewSource library
 		{
-			QuestionsViewController vc; //An instance of QuestionsViewController
 			private List<TriviaQuestionsRecord> ListofTriviaQuestions = new List<TriviaQuestionsRecord>(); //A list of TriviaQuestionsRecords
+			QuestionsViewController vc; //An instance of QuestionsViewController
 
 			//constructor
 			//ListofTriviaQuestions and the vc are passed into tableview
-			public QuestionsTableSource(QuestionsViewController vc_in)
+			public QuestionsTableSource(QuestionsViewController vc_in, List<TriviaQuestionsRecord> templist)
 			{
 				var jsonData = File.ReadAllText(AppDelegate.pathFile);
-				ListofTriviaQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
+				Console.WriteLine(jsonData);
+				ListofTriviaQuestions = templist;
+				//JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
 
 				vc = vc_in;
 			}
@@ -90,7 +93,7 @@ namespace MobileAppClass
 				if (indexPath.Section == 0)
 				{
 					cell.TextLabel.Text = ListofTriviaQuestions[indexPath.Row].question;
-					cell.DetailTextLabel.Text = ListofTriviaQuestions[indexPath.Row].answer;
+					cell.DetailTextLabel.Text = ListofTriviaQuestions[indexPath.Row].DateCreated.ToString("g");
 					cell.DetailTextLabel.TextColor = UIColor.Purple;
 					cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
 				}
@@ -116,7 +119,6 @@ namespace MobileAppClass
 		}
 
 		#endregion
-		//test
 	}
 }
 

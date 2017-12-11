@@ -14,6 +14,8 @@ namespace MobileAppClass
         public string falseQ2 { get; set; }
 		public string falseQ3 { get; set; }
 
+		public DateTime DateCreated;
+
         public TriviaQuestionsRecord(string q, string a, string f1, string f2, string f3)
         {
 			question = q;
@@ -23,6 +25,8 @@ namespace MobileAppClass
 			falseQ3 = f3;
 
 			QuestionID = question.Substring(0, 10) + answer[0].ToString() + GetRandomInt().ToString();
+
+			DateCreated = DateTime.Now;
 		}
 
 		public int GetRandomInt()
