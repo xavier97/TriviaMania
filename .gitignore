@@ -9,6 +9,9 @@
 *.userosscache
 *.sln.docstates
 
+# Newtonsoft
+Newtonsoft.Json.10.0.3/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
