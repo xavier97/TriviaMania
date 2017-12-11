@@ -52,7 +52,11 @@ namespace MobileAppClass
 
 		void AddTap(object sender, EventArgs e)
 		{
-			throw new NotImplementedException();
+			//create a EnterDataViewController
+			EnterDataViewController EnterDataVC = new EnterDataViewController();
+
+			//display EnterDataVC
+			this.NavigationController.PushViewController(EnterDataVC, true);
 		}
 
 		public override void DidReceiveMemoryWarning()
@@ -73,7 +77,6 @@ namespace MobileAppClass
 			public QuestionsTableSource(QuestionsViewController vc_in, List<TriviaQuestionsRecord> templist)
 			{
 				var jsonData = File.ReadAllText(AppDelegate.pathFile);
-				Console.WriteLine(jsonData);
 				ListofTriviaQuestions = templist;
 				//JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
 
@@ -120,7 +123,7 @@ namespace MobileAppClass
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
 				//create a EnterDataViewController
-				EnterDataViewController EnterDataVC = new EnterDataViewController();
+				EnterDataViewController EnterDataVC = new EnterDataViewController(ListofTriviaQuestions[indexPath.Row]);
 
 				//display EnterDataVC
 				vc.NavigationController.PushViewController(EnterDataVC, true);
