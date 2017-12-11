@@ -20,6 +20,10 @@ namespace MobileAppClass
 			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
 
+			//Create Save Button
+			UIBarButtonItem SaveButton = new UIBarButtonItem("+", UIBarButtonItemStyle.Plain, AddTap);
+			NavigationItem.RightBarButtonItem = SaveButton;
+
 			TriviaQuestionsRecord Q1 = new TriviaQuestionsRecord("Which body of land is not a contient?",
 																 "Middle East", "Asia", "Antartica", "Europe");
 			TriviaQuestionsRecord Q2 = new TriviaQuestionsRecord("What day of the year is Christmas?",
@@ -44,6 +48,11 @@ namespace MobileAppClass
 
 			//Create Tableview
 			QuestionsTableView.Source = new QuestionsViewController.QuestionsTableSource(this, StarterQuestionsList);
+		}
+
+		void AddTap(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
 		}
 
 		public override void DidReceiveMemoryWarning()
@@ -108,13 +117,14 @@ namespace MobileAppClass
 			}
 
 			//When the user taps a cell display EnterDataViewController and pass the content of the cell into it
-			//public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-			//{
-			//create a EnterDataViewController
-			//	EnterDataViewController EnterDataVC = new EnterDataViewController(SortedList[indexPath.Row]);
+			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+			{
+				//create a EnterDataViewController
+				EnterDataViewController EnterDataVC = new EnterDataViewController();
 
-			//display EnterDataVC
-			//	vc.NavigationController.PushViewController(EnterDataVC, true            }
+				//display EnterDataVC
+				vc.NavigationController.PushViewController(EnterDataVC, true);
+			}
 
 		}
 
