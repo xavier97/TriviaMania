@@ -18,6 +18,8 @@ namespace MobileAppClass
 			NavigationItem.Title = "Trivia Mania";
 			NavigationController.NavigationBar.BackgroundColor = UIColor.Purple;
 
+
+
         }
 
         partial void ViewQuestionsButton_TouchUpInside(UIButton sender)
