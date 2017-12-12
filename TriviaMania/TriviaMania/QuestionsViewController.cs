@@ -21,9 +21,9 @@ namespace MobileAppClass
 			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
 
-			//Create Save Button
-			UIBarButtonItem SaveButton = new UIBarButtonItem(UIBarButtonSystemItem.Add, AddTap);
-			NavigationItem.RightBarButtonItem = SaveButton;
+			//Create Add question Button
+			UIBarButtonItem AddButton = new UIBarButtonItem(UIBarButtonSystemItem.Add, AddTap);
+			NavigationItem.RightBarButtonItem = AddButton;
 
 		}
 
@@ -31,6 +31,7 @@ namespace MobileAppClass
 		{
 			base.ViewWillAppear(animated);
 
+			//Deserialize json file and add it to a list
 			var jsonData = File.ReadAllText(AppDelegate.pathFile);
 			ListofQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
 
@@ -38,6 +39,7 @@ namespace MobileAppClass
 			QuestionsTableView.Source = new QuestionsViewController.QuestionsTableSource(this);
 		}
 
+		//When the add button gets tapped
 		void AddTap(object sender, EventArgs e)
 		{
 			//create a EnterDataViewController
@@ -54,16 +56,17 @@ namespace MobileAppClass
 		}
 
 		#region QuestionsTableView source code
-
+//---------------------------------------------------------------------------------------------------------------------
 		public class QuestionsTableSource : UITableViewSource  //Inherit UITableViewSource library
 		{
 			private List<TriviaQuestionsRecord> ListofTriviaQuestions = new List<TriviaQuestionsRecord>(); //A list of TriviaQuestionsRecords
 			QuestionsViewController vc; //An instance of QuestionsViewController
 
 			//constructor
-			//ListofTriviaQuestions and the vc are passed into tableview
+			//QuestionsViewController is passed into tableview
 			public QuestionsTableSource(QuestionsViewController vc_in)
 			{
+				//Json file is deserialized and added it to a list
 				var jsonData = File.ReadAllText(AppDelegate.pathFile);
 				ListofTriviaQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
 
@@ -124,8 +127,10 @@ namespace MobileAppClass
 				{
 					case UITableViewCellEditingStyle.Delete:
 
+						//Find question in the list using it's questionID
 						var itemToRemove = ListofTriviaQuestions.Single(r => r.QuestionID == ListofTriviaQuestions[indexPath.Row].QuestionID);
 
+						//Remove question from the list
 						ListofTriviaQuestions.Remove(itemToRemove);
 
 						//Save changes to json file
@@ -146,7 +151,7 @@ namespace MobileAppClass
 			}
 
 		}
-
+//---------------------------------------------------------------------------------------------------------------------
 		#endregion
 	}
 }
