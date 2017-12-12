@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>MobileAppClass</string>
+	<string>Trivia Mania!</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.acme.mobileappclass</string>
 	<key>CFBundleShortVersionString</key>
