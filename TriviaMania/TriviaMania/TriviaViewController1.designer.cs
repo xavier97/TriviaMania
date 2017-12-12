@@ -32,11 +32,11 @@ namespace MobileAppClass
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIProgressView GameStatusProgressBar { get; set; }
+        UIKit.UILabel QuestionLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel QuestionLabel { get; set; }
+        UIKit.UILabel questionNumberLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -80,14 +80,14 @@ namespace MobileAppClass
                 AnswerButton4 = null;
             }
 
-            if (GameStatusProgressBar != null) {
-                GameStatusProgressBar.Dispose ();
-                GameStatusProgressBar = null;
-            }
-
             if (QuestionLabel != null) {
                 QuestionLabel.Dispose ();
                 QuestionLabel = null;
+            }
+
+            if (questionNumberLabel != null) {
+                questionNumberLabel.Dispose ();
+                questionNumberLabel = null;
             }
 
             if (QuestionTimerProgressBar != null) {
