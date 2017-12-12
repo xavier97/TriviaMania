@@ -17,9 +17,9 @@ namespace MobileAppClass
         Stopwatch timePassed;
         List<TriviaQuestionsRecord> ListofTriviaQuestions;
         readonly int maxQuestions = 15; // Maximum # of questions in game
-        readonly int maxTime = 15000; // TODO: Change this to 15000 for 15 seconds when done testing
-        readonly int progressTime = 1000;
-        int questionNumber = 0;
+        readonly int maxTime = 15000; // 15 seconds counted by timer
+        readonly int progressInterval = 1000; // The time bar's timer interval
+        int questionNumber = 1;
 
         public TriviaViewController1() : base("TriviaViewController1", null)
         {
@@ -28,6 +28,8 @@ namespace MobileAppClass
             var jsonData = File.ReadAllText(AppDelegate.pathFile);
             ListofTriviaQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
         }
+
+        #region Answer Buttons
 
         partial void AnswerButton1_TouchUpInside(UIButton sender)
         {
@@ -65,6 +67,8 @@ namespace MobileAppClass
             }
         }
 
+        #endregion
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -76,34 +80,23 @@ namespace MobileAppClass
             questionLabelMargins.Left = 10f;
             questionLabelMargins.Right = 10f;
             questionLabelMargins.Top = 0.5f;
-
             QuestionLabel.Layer.BorderWidth = 3.5f;
-        }
 
-        // Used for flipping the countdown bar
-        private float DegreesToRadians(float degree)
-        {
-            return ((float)((degree) * Math.PI / 180.0));
+            InitTimerBar(); // Reveal timer bar
         }
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
 
-            // Sets up progress bar to countdown in 15 sec interval
-            QuestionTimerProgressBar.SetProgress(15, true);
-            QuestionTimerProgressBar.ProgressTintColor = UIColor.White;
-
-            // Flip progress bar's fill direction
-            QuestionTimerProgressBar.Transform = CGAffineTransform.MakeRotation(DegreesToRadians(180f));
-
-            UISetup(); // Get first question to display to user
-
+            GameSetup(); // Get first question to display to user
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
+
+            BeginTimeFill(); // Begins the timer bar's load
 
             // Countdown Details
             timer = new System.Timers.Timer();
@@ -116,55 +109,13 @@ namespace MobileAppClass
             timePassed = new Stopwatch();
             timePassed.Start();
 
-            #region progress bar details
-
-            // Progress Bar Details
-            timerProgression = new Timer();
-            timerProgression.Interval = progressTime;
-            timerProgression.Enabled = true;
-            timerProgression.Elapsed += (sender, e) => 
-            {
-                Console.WriteLine("hello");
-                QuestionTimerProgressBar.Progress -= 1f;
-            };
-
-            #endregion
-
-        }
-
-        void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            InvokeOnMainThread(() => {
-
-                // Calculate game score
-                int score = GameScore(questionNumber, timePassed.ElapsedMilliseconds);
-
-                // Popup alert that the timer is done
-                UIAlertView timeAlert = new UIAlertView()
-                {
-                    Title = "Time's Up!",
-                    Message = "Final Score: " + score
-                };
-                timeAlert.AddButton("OK");
-                timeAlert.Show();
-
-                // Pop when user acknowledges they lost
-                timeAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
-                {
-                    this.NavigationController.PopViewController(true);
-                };
-            });
-
-            timer.Stop();
-            timerProgression.Stop();
-            timePassed.Stop();
         }
 
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
 
-            // kill timers when exited
+            // Kill timers when exited
             timer.Stop();
             timerProgression.Stop();
             timePassed.Stop();
@@ -179,7 +130,7 @@ namespace MobileAppClass
         /// <summary>
         /// Randomly choosing a question to show and setup UI accordingly
         /// </summary>
-        private void UISetup()
+        private void GameSetup()
         {
             // Get a random question from the list and display it
             int rndQuestion = RandomSelectGenerator.GetInstance().RandomQuestion(ListofTriviaQuestions.Count);
@@ -230,7 +181,33 @@ namespace MobileAppClass
             }
         }
 
-        // When the user selects a correct 
+        #region Timer Progress Bar
+        // Handles QuestionTimerProgressBar's set up and functionality
+        private void BeginTimeFill()
+        {
+            // Progress Bar Details
+            timerProgression = new Timer();
+            timerProgression.Interval = progressInterval;
+            timerProgression.Enabled = true;
+            timerProgression.Elapsed += (sender, e) =>
+            {
+                Console.WriteLine("hello");
+                QuestionTimerProgressBar.Progress -= 1;
+            };
+        }
+
+        // Handles QuestionTimerProgressBar's aesthetic
+        private void InitTimerBar()
+        {
+            QuestionTimerProgressBar.SetProgress(15, true); // 15 sec interval
+            QuestionTimerProgressBar.ProgressTintColor = UIColor.White; // color
+            //QuestionTimerProgressBar.Transform = CGAffineTransform.MakeTranslation(-1.0f, 1.0f); // flip fill
+        }
+        #endregion
+
+        /// <summary>
+        /// When the user selects the correct answer.
+        /// </summary>
         private void WinState()
         {
             // +1 number of questions
@@ -263,18 +240,60 @@ namespace MobileAppClass
                 correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
                 {
                     // Clear fields and display next question
+                    GameSetup();
 
+                    // Allow progress bar to progress
                 };
             }
 
         }
 
+        /// <summary>
+        /// Calculates the user's current or final game score
+        /// </summary>
+        /// <returns>The score.</returns>
+        /// <param name="numCorrect">Number correct.</param>
+        /// <param name="secondsPassed">Seconds passed.</param>
         private int GameScore(int numCorrect, float secondsPassed)
         {
             // Calculate by number_correct_ans * (150s - seconds_passed)
             int totalScore = (int)(numCorrect * (maxTime - secondsPassed));
             return totalScore;
         }
+
+        /// <summary>
+        /// Events that happen if the user 
+        /// runs out of time on a question
+        /// </summary>
+        void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            InvokeOnMainThread(() => {
+
+                // Calculate game score
+                int score = GameScore(questionNumber, timePassed.ElapsedMilliseconds);
+
+                // Popup alert that the timer is done
+                UIAlertView timeAlert = new UIAlertView()
+                {
+                    Title = "Time's Up!",
+                    Message = "Final Score: " + score
+                };
+                timeAlert.AddButton("OK");
+                timeAlert.Show();
+
+                // Pop when user acknowledges they lost
+                timeAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
+                {
+                    this.NavigationController.PopViewController(true);
+                };
+            });
+
+            // Stop all timers when countdown ends
+            timer.Stop();
+            timerProgression.Stop();
+            timePassed.Stop();
+        }
+
     }
 }
 

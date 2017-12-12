@@ -5,13 +5,12 @@ namespace MobileAppClass
     public class RandomSelectGenerator
     {
         List<int> pickedQuestions = new List<int>(); // Questions already asked
-
-        int answerButtonNumber;
-        int questionNumber;
-        private static RandomSelectGenerator instance;
+        int answerButtonNumber; // The button number we'll hide the correct answer at
+        private static RandomSelectGenerator instance; // Singleton instance
 
         private RandomSelectGenerator()
         {
+            // TODO: This gotta go somewhere else -- constructor only called once in a singleton
             // Generate a random number 1-4 [for AnswerBox()]
             Random rnd = new Random();
             answerButtonNumber = rnd.Next(1, 5);
@@ -39,7 +38,7 @@ namespace MobileAppClass
             // Generate a random number 1 - Number of Questions
             // Don't repeat a question already asked; store those in a pickedQuestion list
             Random rnd = new Random();
-            questionNumber = rnd.Next(0, numOfListQuestions);
+            int questionNumber = rnd.Next(0, numOfListQuestions);
 
             while (pickedQuestions.Contains(questionNumber))
             {
