@@ -16,13 +16,13 @@ namespace MobileAppClass
     /// </summary>
     public partial class TriviaViewController1 : UIViewController
     {
-        Timer timer;
-        Timer timerProgression;
-        Stopwatch timePassed;
+		Timer timer = new Timer();
+		Timer timerProgression = new Timer();
+		Stopwatch timePassed = new Stopwatch();
         List<TriviaQuestionsRecord> ListofTriviaQuestions;
         readonly int maxQuestions = 15; // Maximum # of questions in game
         readonly int maxTime = 15000; // 15 seconds counted by timer; also the time bar's timer interval
-        int questionNumber = 1; // Initialized to 1 once the game starts
+		int questionNumber = 1; // Initialized to 1 once the game starts
 
         public TriviaViewController1() : base("TriviaViewController1", null)
         {
@@ -77,6 +77,14 @@ namespace MobileAppClass
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
 
+			//Set timer intervals
+			timer.Interval = maxTime;
+			timerProgression.Interval = 1000;
+
+			//When timers elapse
+            timer.Elapsed += Timer_Elapsed;
+			timerProgression.Elapsed += TimerProgression_Elapsed;
+
             // Question Label Setup
             UIEdgeInsets questionLabelMargins;
             questionLabelMargins.Bottom = 0.5f;
@@ -84,8 +92,6 @@ namespace MobileAppClass
             questionLabelMargins.Right = 10f;
             questionLabelMargins.Top = 0.5f;
             QuestionLabel.Layer.BorderWidth = 3.5f;
-
-            InitTimerBar(); // Reveal timer bar
         }
 
         public override void ViewWillAppear(bool animated)
@@ -101,6 +107,7 @@ namespace MobileAppClass
             base.ViewDidAppear(animated);
 
             // todo: this takes forver to display. why??
+            InitTimerBar(); // Reveal timer bar
             BeginTimeFill(); // Begins the timer bar's load
         }
 
@@ -176,25 +183,10 @@ namespace MobileAppClass
         // Handles QuestionTimerProgressBar's set up and functionality
         private void BeginTimeFill()
         {
-            //Creates countdown timers
-            timer = new Timer();
-            timer.Interval = maxTime;
-			timerProgression = new Timer();
-			timerProgression.Interval = 1000;
-			timePassed = new Stopwatch();
-
 			//Starts timers
-            timer.Enabled = true;
-			timerProgression.Enabled = true;
+			timer.Start();
+			timerProgression.Start();
 			timePassed.Start();
-
-			//When timers elapse
-            timer.Elapsed += Timer_Elapsed;
-			timerProgression.Elapsed += (sender, e) =>
-            {
-                Console.WriteLine("hello");
-                QuestionTimerProgressBar.Progress--;
-            };
         }
 
         // Kills timer bar and progression
@@ -204,9 +196,9 @@ namespace MobileAppClass
             timerProgression.Stop();
             timePassed.Stop();
 
-            // todo: stop ui progress bar from filling
-            //QuestionTimerProgressBar.SetProgress(QuestionTimerProgressBar.Progress, false);
-            QuestionTimerProgressBar.Progress = 0f;
+			// todo: stop ui progress bar from filling
+			//QuestionTimerProgressBar.SetProgress(QuestionTimerProgressBar.Progress, false);
+			QuestionTimerProgressBar.Progress = 0;
         }
 
         // Handles QuestionTimerProgressBar's aesthetic
@@ -220,10 +212,10 @@ namespace MobileAppClass
         /// <summary>
         /// When the user selects the correct answer.
         /// </summary>
-        private void WinState()
+		private void WinState()
         {
-            // Stop the progress timer
-            EndTimeFill();
+			//Stop the progress timer
+			EndTimeFill();
 
             // +1 number of questions
             questionNumber++;
@@ -260,7 +252,8 @@ namespace MobileAppClass
                     // Clear fields and display next question
                     GameSetup();
 
-                    // Allow progress bar to progress
+					//Reset time
+					BeginTimeFill();
                 };
             }
 
@@ -310,6 +303,11 @@ namespace MobileAppClass
             EndTimeFill();
         }
 
+		void TimerProgression_Elapsed(object sender, ElapsedEventArgs e)
+		{
+			Console.WriteLine("hello");
+            QuestionTimerProgressBar.Progress++;
+		}
     }
 }
 

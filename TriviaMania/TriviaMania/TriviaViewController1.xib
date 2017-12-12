@@ -111,7 +111,7 @@
                         <action selector="AnswerButton3_TouchUpInside:" destination="-1" id="4783" eventType="touchUpInside"/>
                     </connections>
                 </button>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2487" misplaced="YES">
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0" translatesAutoresizingMaskIntoConstraints="NO" id="2487" misplaced="YES">
                     <rect key="frame" x="148" y="299" width="304" height="2"/>
                     <constraints>
                         <constraint id="4897" firstItem="2487" firstAttribute="width" constant="304"/>
