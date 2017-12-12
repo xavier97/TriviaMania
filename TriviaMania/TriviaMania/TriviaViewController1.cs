@@ -197,14 +197,13 @@ namespace MobileAppClass
             timePassed.Stop();
 
 			// todo: stop ui progress bar from filling
-			//QuestionTimerProgressBar.SetProgress(QuestionTimerProgressBar.Progress, false);
-			//QuestionTimerProgressBar.Progress = 0;
+			QuestionTimerProgressBar.Progress = 0f;
         }
 
         // Handles QuestionTimerProgressBar's aesthetic
         private void InitTimerBar()
         {
-            QuestionTimerProgressBar.SetProgress(15, true); // 15 sec interval
+			//QuestionTimerProgressBar.SetProgress(15, true); // 15 sec interval
             QuestionTimerProgressBar.ProgressTintColor = UIColor.White; // color
         }
         #endregion
@@ -214,9 +213,8 @@ namespace MobileAppClass
         /// </summary>
 		private void WinState()
         {
-				//Stop the progress timer
-				EndTimeFill();
-				QuestionTimerProgressBar.Progress = 0;
+			//Stop the progress timer
+			EndTimeFill();
 
             // +1 number of questions
             questionNumber++;
@@ -254,7 +252,7 @@ namespace MobileAppClass
                     GameSetup();
 
 					//Reset time
-					//BeginTimeFill();
+					BeginTimeFill();
                 };
             }
 
@@ -308,7 +306,10 @@ namespace MobileAppClass
 		void TimerProgression_Elapsed(object sender, ElapsedEventArgs e)
 		{
 			Console.WriteLine("hello");
-            QuestionTimerProgressBar.Progress++;
+			InvokeOnMainThread(() =>
+			{
+				QuestionTimerProgressBar.Progress = QuestionTimerProgressBar.Progress + 0.07f;
+			});
 		}
     }
 }
