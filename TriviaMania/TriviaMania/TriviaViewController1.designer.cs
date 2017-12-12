@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -45,6 +45,18 @@ namespace MobileAppClass
         [Action ("AnswerButton1_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void AnswerButton1_TouchUpInside (UIKit.UIButton sender);
+
+        [Action ("AnswerButton2_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void AnswerButton2_TouchUpInside (UIKit.UIButton sender);
+
+        [Action ("AnswerButton3_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void AnswerButton3_TouchUpInside (UIKit.UIButton sender);
+
+        [Action ("AnswerButton4_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void AnswerButton4_TouchUpInside (UIKit.UIButton sender);
 
         void ReleaseDesignerOutlets ()
         {

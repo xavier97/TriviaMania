@@ -3,7 +3,6 @@ namespace MobileAppClass
 {
     public class CorrectBoxGenerator
     {
-
         int answerButtonNumber;
         private static CorrectBoxGenerator instance;
 

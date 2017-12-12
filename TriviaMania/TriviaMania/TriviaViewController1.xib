@@ -79,6 +79,9 @@
                             <real key="value" value="20"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="AnswerButton2_TouchUpInside:" destination="-1" id="4748" eventType="touchUpInside"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2485">
                     <rect key="frame" x="166" y="435" width="150" height="65"/>
@@ -93,6 +96,9 @@
                             <real key="value" value="20"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="AnswerButton4_TouchUpInside:" destination="-1" id="4818" eventType="touchUpInside"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2486">
                     <rect key="frame" x="8" y="435" width="150" height="65"/>
@@ -107,6 +113,9 @@
                             <real key="value" value="20"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="AnswerButton3_TouchUpInside:" destination="-1" id="4783" eventType="touchUpInside"/>
+                    </connections>
                 </button>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2487">
                     <rect key="frame" x="8" y="322" width="304" height="2"/>
