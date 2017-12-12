@@ -65,12 +65,12 @@ namespace MobileAppClass
         partial void NewGameButton_TouchUpInside(UIButton sender)
         {
 			//If there are less than 15 questions in the list, push alert
-			var jsonData = File.ReadAllText(AppDelegate.pathFile);
+			/*var jsonData = File.ReadAllText(AppDelegate.pathFile);
 			if (JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData).Count < MinimumQuestions)
 			{
 				AlertMessage();
 				return;
-			}
+			}*/
 
             // Create a TriviaViewController1
             TriviaViewController1 TriviaVC = new TriviaViewController1();

@@ -176,25 +176,24 @@ namespace MobileAppClass
         // Handles QuestionTimerProgressBar's set up and functionality
         private void BeginTimeFill()
         {
-            // Countdown Details
+            //Creates countdown timers
             timer = new Timer();
             timer.Interval = maxTime;
+			timerProgression = new Timer();
+			timerProgression.Interval = 1000;
+			timePassed = new Stopwatch();
+
+			//Starts timers
             timer.Enabled = true;
+			timerProgression.Enabled = true;
+			timePassed.Start();
+
+			//When timers elapse
             timer.Elapsed += Timer_Elapsed;
-
-            // Begin countdown (Stopwatch; counts upward for score)
-            timer.Start();
-            timePassed = new Stopwatch();
-            timePassed.Start();
-
-            // Progress Bar Details
-            timerProgression = new Timer();
-            timerProgression.Interval = maxTime;
-            timerProgression.Enabled = true;
-            timerProgression.Elapsed += (sender, e) =>
+			timerProgression.Elapsed += (sender, e) =>
             {
                 Console.WriteLine("hello");
-                QuestionTimerProgressBar.Progress -= 1;
+                QuestionTimerProgressBar.Progress--;
             };
         }
 

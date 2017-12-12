@@ -114,18 +114,10 @@
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2487" misplaced="YES">
                     <rect key="frame" x="148" y="299" width="304" height="2"/>
                     <constraints>
-                        <constraint id="4844" firstItem="2487" firstAttribute="width" constant="304"/>
+                        <constraint id="4897" firstItem="2487" firstAttribute="width" constant="304"/>
+                        <constraint id="4903" firstItem="2487" firstAttribute="height" constant="5"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="4844"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                        <mask key="constraints">
-                            <include reference="4844"/>
-                        </mask>
-                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES"/>
                 </progressView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4863" translatesAutoresizingMaskIntoConstraints="NO">
                     <rect key="frame" x="241" y="491" width="75" height="21"/>
@@ -148,11 +140,8 @@
             </subviews>
             <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.66274509803921566" green="0.33333333333333331" blue="0.9882352941176471" alpha="1"/>
             <constraints>
-                <constraint id="4846" firstItem="2487" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
                 <constraint id="4848" firstItem="151" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
                 <constraint id="4849" firstItem="151" firstAttribute="top" secondItem="2" secondAttribute="top" constant="72"/>
-                <constraint id="4850" firstItem="2487" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
-                <constraint id="4851" firstItem="2487" firstAttribute="top" secondItem="151" secondAttribute="bottom" constant="26"/>
                 <constraint id="4852" firstItem="2484" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" constant="74"/>
                 <constraint id="4853" firstItem="2484" firstAttribute="top" secondItem="151" secondAttribute="bottom" constant="56"/>
                 <constraint id="4854" firstItem="2" firstAttribute="centerX" secondItem="2473" secondAttribute="centerX" constant="84"/>
@@ -161,23 +150,14 @@
                 <constraint id="4857" firstItem="2485" firstAttribute="top" secondItem="151" secondAttribute="bottom" constant="135"/>
                 <constraint id="4858" firstItem="2" firstAttribute="centerX" secondItem="2486" secondAttribute="centerX" constant="84"/>
                 <constraint id="4859" firstItem="2486" firstAttribute="top" secondItem="151" secondAttribute="bottom" constant="135"/>
-                <constraint id="4860" firstItem="2487" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
                 <constraint id="4866" firstItem="4863" firstAttribute="top" secondItem="2486" secondAttribute="bottom" constant="18"/>
                 <constraint id="4873" firstItem="4864" firstAttribute="top" secondItem="2485" secondAttribute="bottom" constant="18"/>
                 <constraint id="4874" firstItem="4864" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" constant="35"/>
                 <constraint id="4875" firstItem="2" firstAttribute="centerX" secondItem="4863" secondAttribute="centerX" constant="21"/>
+                <constraint id="4905" firstItem="2487" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="4906" firstItem="2487" firstAttribute="top" secondItem="151" secondAttribute="bottom" constant="26"/>
             </constraints>
             <point key="canvasLocation" x="32" y="28"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="4846"/>
-                </mask>
-            </variation>
-            <variation key="heightClass=regular-widthClass=compact">
-                <mask key="constraints">
-                    <include reference="4846"/>
-                </mask>
-            </variation>
         </view>
     </objects>
 </document>
