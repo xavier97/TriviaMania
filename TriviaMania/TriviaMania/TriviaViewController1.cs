@@ -198,7 +198,7 @@ namespace MobileAppClass
 
 			// todo: stop ui progress bar from filling
 			//QuestionTimerProgressBar.SetProgress(QuestionTimerProgressBar.Progress, false);
-			QuestionTimerProgressBar.Progress = 0;
+			//QuestionTimerProgressBar.Progress = 0;
         }
 
         // Handles QuestionTimerProgressBar's aesthetic
@@ -214,8 +214,9 @@ namespace MobileAppClass
         /// </summary>
 		private void WinState()
         {
-			//Stop the progress timer
-			EndTimeFill();
+				//Stop the progress timer
+				EndTimeFill();
+				QuestionTimerProgressBar.Progress = 0;
 
             // +1 number of questions
             questionNumber++;
@@ -253,7 +254,7 @@ namespace MobileAppClass
                     GameSetup();
 
 					//Reset time
-					BeginTimeFill();
+					//BeginTimeFill();
                 };
             }
 
@@ -296,6 +297,7 @@ namespace MobileAppClass
                 timeAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
                 {
                     this.NavigationController.PopViewController(true);
+					QuestionTimerProgressBar.SetProgress(0, false);
                 };
             });
 
