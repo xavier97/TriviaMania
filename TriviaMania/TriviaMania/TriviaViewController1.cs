@@ -4,6 +4,7 @@ using UIKit;
 using CoreGraphics;
 using System.Timers;
 //using System.Threading;
+using System.Diagnostics;
 
 namespace MobileAppClass
 {
@@ -11,11 +12,11 @@ namespace MobileAppClass
     {
         Timer timer;
         Timer timerProgression;
+        Stopwatch timePassed;
         readonly int maxQuestions = 15; // Maximum # of questions in game
-        readonly int timeLeft = 15000; // TODO: Change this to 15000 for 15 seconds when done testing
+        readonly int maxTime = 15000; // TODO: Change this to 15000 for 15 seconds when done testing
         readonly int progressTime = 1000;
         int questionNumber = 0;
-        int score;
 
         public TriviaViewController1() : base("TriviaViewController1", null)
         {
@@ -27,8 +28,7 @@ namespace MobileAppClass
             if (CorrectBoxGenerator.GetInstance().AnswerBox() == 1)
             {
                 Console.WriteLine("1");
-
-
+                WinState();
             }
         }
 
@@ -37,6 +37,7 @@ namespace MobileAppClass
             if (CorrectBoxGenerator.GetInstance().AnswerBox() == 2)
             {
                 Console.WriteLine("2");
+                WinState();
             }
         }
 
@@ -45,6 +46,7 @@ namespace MobileAppClass
             if (CorrectBoxGenerator.GetInstance().AnswerBox() == 3)
             {
                 Console.WriteLine("3");
+                WinState();
             }
         }
 
@@ -53,6 +55,7 @@ namespace MobileAppClass
             if (CorrectBoxGenerator.GetInstance().AnswerBox() == 4)
             {
                 Console.WriteLine("4");
+                WinState();
             }
         }
 
@@ -99,10 +102,14 @@ namespace MobileAppClass
 
             // Countdown Details
             timer = new System.Timers.Timer();
-            timer.Interval = timeLeft;
+            timer.Interval = maxTime;
             timer.Enabled = true;
             timer.Elapsed += Timer_Elapsed;
+
+            // Begin countdown
             timer.Start();
+            timePassed = new Stopwatch();
+            timePassed.Start();
 
             #region progress bar details
 
@@ -124,6 +131,9 @@ namespace MobileAppClass
         {
             InvokeOnMainThread(() => {
 
+                // Calculate game score
+                int score = GameScore(questionNumber, timePassed.ElapsedMilliseconds);
+
                 // Popup alert that the timer is done
                 UIAlertView timeAlert = new UIAlertView()
                 {
@@ -142,6 +152,7 @@ namespace MobileAppClass
 
             timer.Stop();
             timerProgression.Stop();
+            timePassed.Stop();
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -164,10 +175,8 @@ namespace MobileAppClass
             // +1 number of questions
             questionNumber++;
 
-            // Get time left
-
             // Calculate game score
-            //GameScore(questionNumber, );
+            int score = GameScore(questionNumber, timePassed.ElapsedMilliseconds);
 
             // Popup alert that the answer was correct
             UIAlertView correctAlert = new UIAlertView()
@@ -183,6 +192,7 @@ namespace MobileAppClass
             {
                 correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
                 {
+                    Console.WriteLine("you win");
                     // Push "WIN" VC
                     //this.NavigationController.PopViewController(true);
                 };
@@ -201,9 +211,9 @@ namespace MobileAppClass
 
         private int GameScore(int numCorrect, float secondsPassed)
         {
-            // Calculate by number_correct_ans * (150s - sum_seconds_passed)
-
-            return 0;
+            // Calculate by number_correct_ans * (150s - seconds_passed)
+            int totalScore = (int)(numCorrect * (maxTime - secondsPassed));
+            return totalScore;
         }
     }
 }
