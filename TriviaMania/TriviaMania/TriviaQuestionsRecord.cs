@@ -16,15 +16,17 @@ namespace MobileAppClass
 
 		public DateTime DateCreated;
 
-        public TriviaQuestionsRecord(string q, string a, string f1, string f2, string f3)
-        {
+		public TriviaQuestionsRecord(string q, string a, string f1, string f2, string f3)
+		{
 			question = q;
 			answer = a;
 			falseQ1 = f1;
 			falseQ2 = f2;
 			falseQ3 = f3;
 
-			QuestionID = question.Substring(0, 10) + answer[0].ToString() + GetRandomInt().ToString();
+			QuestionID = question[0].ToString() + answer[0].ToString()
+			                        + falseQ1[0].ToString() + falseQ2[0].ToString() 
+			                        + falseQ3[0].ToString() + GetRandomInt().ToString();
 
 			DateCreated = DateTime.Now;
 		}

@@ -9,7 +9,7 @@ namespace MobileAppClass
 {
 	public partial class QuestionsViewController : UIViewController
 	{
-		private List<TriviaQuestionsRecord> StarterQuestionsList = new List<TriviaQuestionsRecord>();
+		public List<TriviaQuestionsRecord> ListofQuestions = new List<TriviaQuestionsRecord>();
 
 		public QuestionsViewController() : base("QuestionsViewController", null)
 		{
@@ -21,24 +21,8 @@ namespace MobileAppClass
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			//Create Save Button
-			UIBarButtonItem SaveButton = new UIBarButtonItem("+", UIBarButtonItemStyle.Plain, AddTap);
+			UIBarButtonItem SaveButton = new UIBarButtonItem(UIBarButtonSystemItem.Add, AddTap);
 			NavigationItem.RightBarButtonItem = SaveButton;
-
-			TriviaQuestionsRecord Q1 = new TriviaQuestionsRecord("Which body of land is not a contient?",
-																 "Middle East", "Asia", "Antartica", "Europe");
-			TriviaQuestionsRecord Q2 = new TriviaQuestionsRecord("What day of the year is Christmas?",
-																 "December 25th", "December 8th", "July 4th", "I'm running out of ideas");
-
-			StarterQuestionsList.Add(Q1);
-			StarterQuestionsList.Add(Q2);
-
-			//Write everything to the file
-			var myJson = JsonConvert.SerializeObject(StarterQuestionsList);
-
-			using (var streamwriter = new StreamWriter(AppDelegate.pathFile, false))
-			{
-				streamwriter.Write(myJson); 
-			}
 
 		}
 
@@ -46,14 +30,17 @@ namespace MobileAppClass
 		{
 			base.ViewWillAppear(animated);
 
+			var jsonData = File.ReadAllText(AppDelegate.pathFile);
+			ListofQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
+
 			//Create Tableview
-			QuestionsTableView.Source = new QuestionsViewController.QuestionsTableSource(this, StarterQuestionsList);
+			QuestionsTableView.Source = new QuestionsViewController.QuestionsTableSource(this);
 		}
 
 		void AddTap(object sender, EventArgs e)
 		{
 			//create a EnterDataViewController
-			EnterDataViewController EnterDataVC = new EnterDataViewController();
+			EnterDataViewController EnterDataVC = new EnterDataViewController(ListofQuestions);
 
 			//display EnterDataVC
 			this.NavigationController.PushViewController(EnterDataVC, true);
@@ -74,7 +61,7 @@ namespace MobileAppClass
 
 			//constructor
 			//ListofTriviaQuestions and the vc are passed into tableview
-			public QuestionsTableSource(QuestionsViewController vc_in, List<TriviaQuestionsRecord> templist)
+			public QuestionsTableSource(QuestionsViewController vc_in)
 			{
 				var jsonData = File.ReadAllText(AppDelegate.pathFile);
 				ListofTriviaQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
@@ -122,8 +109,9 @@ namespace MobileAppClass
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
 				//create a EnterDataViewController
-				EnterDataViewController EnterDataVC = new EnterDataViewController(ListofTriviaQuestions[indexPath.Row]);
-
+				EnterDataViewController EnterDataVC = new EnterDataViewController(ListofTriviaQuestions[indexPath.Row],
+																				  ListofTriviaQuestions);
+				                                                                
 				//display EnterDataVC
 				vc.NavigationController.PushViewController(EnterDataVC, true);
 			}
