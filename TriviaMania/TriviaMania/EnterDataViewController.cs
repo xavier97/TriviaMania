@@ -34,7 +34,7 @@ namespace MobileAppClass
 			UIBarButtonItem SaveButton = new UIBarButtonItem("Save", UIBarButtonItemStyle.Plain, SaveTap);
 			NavigationItem.RightBarButtonItem = SaveButton;
 
-			//If the user tapped a cell to open this vc load the data!
+			//If the user tapped a cell to open this vc load the question data
 			if (DataToLoad != null)
 			{
 				QuestionField.Text = DataToLoad.question;
@@ -46,6 +46,8 @@ namespace MobileAppClass
 
 		}
 
+		#region save button code
+//---------------------------------------------------------------------------------------------------------------------
 		void SaveTap(object sender, EventArgs e)
 		{
 			int MaxQuestionLength = 150;
@@ -69,7 +71,7 @@ namespace MobileAppClass
 			if (QuestionField.Text.Length > MaxQuestionLength)
 			{
 				errorToShow = "Question too long";
-				errorDetails = "Exceeded 150 character limit";
+				errorDetails = "Question exceeds 150 character limit";
 
 				ErrorMessage(errorToShow, errorDetails);
 
@@ -87,7 +89,7 @@ namespace MobileAppClass
 			}
 				
 
-			//If the user is editing amn already existing question, save the edits
+			//If the user is editing an already existing question, save the edits
 			if (DataToLoad != null)
 			{
 				DataToLoad.question = QuestionField.Text;
@@ -133,6 +135,8 @@ namespace MobileAppClass
 
 			NavigationController.PopViewController(true);
 		}
+//---------------------------------------------------------------------------------------------------------------------
+  		#endregion
 
 		public override void DidReceiveMemoryWarning()
 		{

@@ -24,6 +24,7 @@ namespace MobileAppClass
 			falseQ2 = f2;
 			falseQ3 = f3;
 
+			//Create unique question ID
 			QuestionID = question[0].ToString() + answer[0].ToString()
 			                        + falseQ1[0].ToString() + falseQ2[0].ToString() 
 			                        + falseQ3[0].ToString() + GetRandomInt().ToString();
@@ -31,6 +32,7 @@ namespace MobileAppClass
 			DateCreated = DateTime.Now;
 		}
 
+		//Would not deserialize unless there was an empty constructor??
 		public TriviaQuestionsRecord()
 		{
 			

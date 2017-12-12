@@ -31,10 +31,15 @@ namespace MobileAppClass
 																	 "December 25th", "December 8th", "July 4th", "I'm running out of ideas");
 				TriviaQuestionsRecord Q3 = new TriviaQuestionsRecord("What does the fox say?",
 																	 "Ring-ding-ding-dingeringeding!", "Woof", "Meow", "Toot Toot");
+				TriviaQuestionsRecord Q4 = new TriviaQuestionsRecord("How many days are in a year?", "365", "300", "465", "52");
+				TriviaQuestionsRecord Q5 = new TriviaQuestionsRecord("What is Overwatch?", "A video game", "A movie",
+																	 "A TV show", "A book");
 
 				StarterQuestionsList.Add(Q1);
 				StarterQuestionsList.Add(Q2);
 				StarterQuestionsList.Add(Q3);
+				StarterQuestionsList.Add(Q4);
+				StarterQuestionsList.Add(Q5);
 
 				//Write everything to the file
 				var myJson = JsonConvert.SerializeObject(StarterQuestionsList);
