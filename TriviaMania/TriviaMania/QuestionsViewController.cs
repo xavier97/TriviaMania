@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Foundation;
 using Newtonsoft.Json;
 using UIKit;
@@ -114,6 +115,34 @@ namespace MobileAppClass
 				                                                                
 				//display EnterDataVC
 				vc.NavigationController.PushViewController(EnterDataVC, true);
+			}
+
+			//Delete a question
+			public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
+			{
+				switch (editingStyle)
+				{
+					case UITableViewCellEditingStyle.Delete:
+
+						var itemToRemove = ListofTriviaQuestions.Single(r => r.QuestionID == ListofTriviaQuestions[indexPath.Row].QuestionID);
+
+						ListofTriviaQuestions.Remove(itemToRemove);
+
+						//Save changes to json file
+						var myJson = JsonConvert.SerializeObject(ListofTriviaQuestions);
+
+						using (var streamwriter = new StreamWriter(AppDelegate.pathFile, false))
+						{
+							streamwriter.Write(myJson);
+						}
+
+						// delete the row from the table
+						tableView.DeleteRows(new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Fade);
+						break;
+					case UITableViewCellEditingStyle.None:
+						Console.WriteLine("CommitEditingStyle:None called");
+						break;
+				}
 			}
 
 		}
