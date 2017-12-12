@@ -3,8 +3,10 @@
 using UIKit;
 using CoreGraphics;
 using System.Timers;
-//using System.Threading;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace MobileAppClass
 {
@@ -13,6 +15,7 @@ namespace MobileAppClass
         Timer timer;
         Timer timerProgression;
         Stopwatch timePassed;
+        List<TriviaQuestionsRecord> ListofTriviaQuestions;
         readonly int maxQuestions = 15; // Maximum # of questions in game
         readonly int maxTime = 15000; // TODO: Change this to 15000 for 15 seconds when done testing
         readonly int progressTime = 1000;
@@ -20,12 +23,15 @@ namespace MobileAppClass
 
         public TriviaViewController1() : base("TriviaViewController1", null)
         {
-            
+            // Initialize the list and convert Json from local storage to list
+            ListofTriviaQuestions = new List<TriviaQuestionsRecord>();
+            var jsonData = File.ReadAllText(AppDelegate.pathFile);
+            ListofTriviaQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
         }
 
         partial void AnswerButton1_TouchUpInside(UIButton sender)
         {
-            if (CorrectBoxGenerator.GetInstance().AnswerBox() == 1)
+            if (RandomSelectGenerator.GetInstance().AnswerBox() == 1)
             {
                 Console.WriteLine("1");
                 WinState();
@@ -34,7 +40,7 @@ namespace MobileAppClass
 
         partial void AnswerButton2_TouchUpInside(UIButton sender)
         {
-            if (CorrectBoxGenerator.GetInstance().AnswerBox() == 2)
+            if (RandomSelectGenerator.GetInstance().AnswerBox() == 2)
             {
                 Console.WriteLine("2");
                 WinState();
@@ -43,7 +49,7 @@ namespace MobileAppClass
 
         partial void AnswerButton3_TouchUpInside(UIButton sender)
         {
-            if (CorrectBoxGenerator.GetInstance().AnswerBox() == 3)
+            if (RandomSelectGenerator.GetInstance().AnswerBox() == 3)
             {
                 Console.WriteLine("3");
                 WinState();
@@ -52,7 +58,7 @@ namespace MobileAppClass
 
         partial void AnswerButton4_TouchUpInside(UIButton sender)
         {
-            if (CorrectBoxGenerator.GetInstance().AnswerBox() == 4)
+            if (RandomSelectGenerator.GetInstance().AnswerBox() == 4)
             {
                 Console.WriteLine("4");
                 WinState();
@@ -72,12 +78,9 @@ namespace MobileAppClass
             questionLabelMargins.Top = 0.5f;
 
             QuestionLabel.Layer.BorderWidth = 3.5f;
-
-            #region making a random box the answer
-            #endregion
-
         }
 
+        // Used for flipping the countdown bar
         private float DegreesToRadians(float degree)
         {
             return ((float)((degree) * Math.PI / 180.0));
@@ -87,12 +90,14 @@ namespace MobileAppClass
         {
             base.ViewWillAppear(animated);
 
-            QuestionTimerProgressBar.SetProgress(15, true); // TODO: This is for 5 seconds. Make it for 15.
+            // Sets up progress bar to countdown in 15 sec interval
+            QuestionTimerProgressBar.SetProgress(15, true);
             QuestionTimerProgressBar.ProgressTintColor = UIColor.White;
 
             // Flip progress bar's fill direction
             QuestionTimerProgressBar.Transform = CGAffineTransform.MakeRotation(DegreesToRadians(180f));
-            //QuestionTimerProgressBar.Transform = CGAffineTransform.MakeTranslation(1, -1);
+
+            UISetup(); // Get first question to display to user
 
         }
 
@@ -140,10 +145,10 @@ namespace MobileAppClass
                     Title = "Time's Up!",
                     Message = "Final Score: " + score
                 };
-
                 timeAlert.AddButton("OK");
                 timeAlert.Show();
 
+                // Pop when user acknowledges they lost
                 timeAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
                 {
                     this.NavigationController.PopViewController(true);
@@ -159,9 +164,10 @@ namespace MobileAppClass
         {
             base.ViewDidDisappear(animated);
 
-            // kill timers when exitted
+            // kill timers when exited
             timer.Stop();
             timerProgression.Stop();
+            timePassed.Stop();
         }
 
         public override void DidReceiveMemoryWarning()
@@ -170,6 +176,61 @@ namespace MobileAppClass
             // Release any cached data, images, etc that aren't in use.
         }
 
+        /// <summary>
+        /// Randomly choosing a question to show and setup UI accordingly
+        /// </summary>
+        private void UISetup()
+        {
+            // Get a random question from the list and display it
+            int rndQuestion = RandomSelectGenerator.GetInstance().RandomQuestion(ListofTriviaQuestions.Count);
+
+            QuestionLabel.Text = ListofTriviaQuestions[rndQuestion].question;
+            QuestionLabel.TextAlignment = UITextAlignment.Natural;
+
+            // Finds the correct answer box to "hide" the correct ansswer in
+            if (RandomSelectGenerator.GetInstance().AnswerBox() == 1)
+            {
+                // Correct Answer
+                AnswerButton1.SetTitle(ListofTriviaQuestions[rndQuestion].answer, UIControlState.Normal);
+
+                // False Answers
+                AnswerButton2.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ2, UIControlState.Normal);
+                AnswerButton3.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ3, UIControlState.Normal);
+                AnswerButton4.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ1, UIControlState.Normal);
+            }
+            else if (RandomSelectGenerator.GetInstance().AnswerBox() == 2)
+            {
+                // Correct Answer
+                AnswerButton2.SetTitle(ListofTriviaQuestions[rndQuestion].answer, UIControlState.Normal);
+
+                // False Answers
+                AnswerButton1.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ1, UIControlState.Normal);
+                AnswerButton3.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ3, UIControlState.Normal);
+                AnswerButton4.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ2, UIControlState.Normal);
+            }
+            else if (RandomSelectGenerator.GetInstance().AnswerBox() == 3)
+            {
+                // Correct Answer
+                AnswerButton3.SetTitle(ListofTriviaQuestions[rndQuestion].answer, UIControlState.Normal);
+
+                // False Answers
+                AnswerButton1.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ1, UIControlState.Normal);
+                AnswerButton4.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ2, UIControlState.Normal);
+                AnswerButton2.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ3, UIControlState.Normal);
+            }
+            else if (RandomSelectGenerator.GetInstance().AnswerBox() == 4)
+            {
+                // Correct Answer
+                AnswerButton4.SetTitle(ListofTriviaQuestions[rndQuestion].answer, UIControlState.Normal);
+
+                // False Answers
+                AnswerButton1.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ3, UIControlState.Normal);
+                AnswerButton2.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ2, UIControlState.Normal);
+                AnswerButton3.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ1, UIControlState.Normal);
+            }
+        }
+
+        // When the user selects a correct 
         private void WinState()
         {
             // +1 number of questions
@@ -205,7 +266,6 @@ namespace MobileAppClass
 
                 };
             }
-
 
         }
 

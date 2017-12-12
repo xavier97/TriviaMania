@@ -122,7 +122,7 @@
     <Compile Include="EnterDataViewController.designer.cs">
       <DependentUpon>EnterDataViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="CorrectBoxGenerator.cs" />
+    <Compile Include="RandomSelectGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MyViewController.xib" />
