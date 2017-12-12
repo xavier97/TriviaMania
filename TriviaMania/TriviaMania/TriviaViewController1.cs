@@ -10,6 +10,10 @@ using Newtonsoft.Json;
 
 namespace MobileAppClass
 {
+    /// <summary>
+    /// The Trivia Game screen that manages the questions
+    /// and answers interface for challenging the user.
+    /// </summary>
     public partial class TriviaViewController1 : UIViewController
     {
         Timer timer;
@@ -19,7 +23,7 @@ namespace MobileAppClass
         readonly int maxQuestions = 15; // Maximum # of questions in game
         readonly int maxTime = 15000; // 15 seconds counted by timer
         readonly int progressInterval = 1000; // The time bar's timer interval
-        int questionNumber = 1;
+        int questionNumber = 1; // Initialized to 1 once the game starts
 
         public TriviaViewController1() : base("TriviaViewController1", null)
         {
@@ -96,6 +100,7 @@ namespace MobileAppClass
         {
             base.ViewDidAppear(animated);
 
+            // todo: this takes forver to display. why??
             BeginTimeFill(); // Begins the timer bar's load
 
             // Countdown Details
@@ -188,12 +193,18 @@ namespace MobileAppClass
             // Progress Bar Details
             timerProgression = new Timer();
             timerProgression.Interval = progressInterval;
-            timerProgression.Enabled = true;
             timerProgression.Elapsed += (sender, e) =>
             {
                 Console.WriteLine("hello");
                 QuestionTimerProgressBar.Progress -= 1;
             };
+            timerProgression.Enabled = true;
+        }
+
+        // Kills timer bar and progression
+        private void EndTimeFill()
+        {
+            timerProgression.Dispose();
         }
 
         // Handles QuestionTimerProgressBar's aesthetic
@@ -210,6 +221,9 @@ namespace MobileAppClass
         /// </summary>
         private void WinState()
         {
+            // Stop the progress timer
+            EndTimeFill();
+
             // +1 number of questions
             questionNumber++;
 
