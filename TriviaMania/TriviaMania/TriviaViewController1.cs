@@ -92,6 +92,7 @@ namespace MobileAppClass
         {
             base.ViewWillAppear(animated);
 
+			questionNumberLabel.Text = questionNumber.ToString(); //set question number label to 1
             GameSetup(); // Get first question to display to user
         }
 
@@ -254,6 +255,9 @@ namespace MobileAppClass
             {
                 correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
                 {
+					//Update question number label
+					questionNumberLabel.Text = questionNumber.ToString();
+
                     // Clear fields and display next question
                     GameSetup();
 

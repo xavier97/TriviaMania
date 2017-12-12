@@ -9,6 +9,7 @@ namespace MobileAppClass
     public partial class MyViewController : UIViewController
     {
 		private List<TriviaQuestionsRecord> StarterQuestionsList = new List<TriviaQuestionsRecord>();
+		int MinimumQuestions = 15;
 
         public MyViewController() : base("MyViewController", null)
         {
@@ -63,6 +64,14 @@ namespace MobileAppClass
 
         partial void NewGameButton_TouchUpInside(UIButton sender)
         {
+			//If there are less than 15 questions in the list, push alert
+			var jsonData = File.ReadAllText(AppDelegate.pathFile);
+			if (JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData).Count < MinimumQuestions)
+			{
+				AlertMessage();
+				return;
+			}
+
             // Create a TriviaViewController1
             TriviaViewController1 TriviaVC = new TriviaViewController1();
 
@@ -75,6 +84,23 @@ namespace MobileAppClass
             base.DidReceiveMemoryWarning();
             // Release any cached data, images, etc that aren't in use.
         }
+
+		//Alert message
+		public void AlertMessage()
+		{
+			//Create alert
+			UIAlertController QuestionErrorAlert;
+			QuestionErrorAlert = UIAlertController.Create("Cannot start New Game", "Must have at least 15 questions to start", UIAlertControllerStyle.Alert);
+
+			//Create cancel button
+			UIAlertAction CancelButton = UIAlertAction.Create("Okay", UIAlertActionStyle.Cancel, null);
+
+			//Show cancel button
+			QuestionErrorAlert.AddAction(CancelButton);
+
+			//Show the alert
+			this.PresentViewController(QuestionErrorAlert, false, null);
+		}
 
     }
 }
