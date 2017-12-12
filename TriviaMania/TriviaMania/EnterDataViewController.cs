@@ -48,6 +48,46 @@ namespace MobileAppClass
 
 		void SaveTap(object sender, EventArgs e)
 		{
+			int MaxQuestionLength = 150;
+			int MaxAnswerLength = 45;
+			string errorToShow;
+			string errorDetails;
+
+			//If any text fields are left blank raise an error
+			if (QuestionField.Text.Trim() == @"" || CorrectAnswer.Text.Trim() == @"" || false1.Text.Trim() == @"" ||
+			    false2.Text.Trim() == @"" || false3.Text.Trim() == @"")
+			{
+				errorToShow = "Cannot save question";
+				errorDetails = "Text fields left blank";
+
+				ErrorMessage(errorToShow, errorDetails);
+
+				return;
+			}
+
+			//If any of the text fields are over the charcater limit, raise error
+			if (QuestionField.Text.Length > MaxQuestionLength)
+			{
+				errorToShow = "Question too long";
+				errorDetails = "Exceeded 150 character limit";
+
+				ErrorMessage(errorToShow, errorDetails);
+
+				return;
+			}
+			else if (CorrectAnswer.Text.Length > MaxAnswerLength || false1.Text.Length > MaxAnswerLength ||
+					false2.Text.Length > MaxAnswerLength || false3.Text.Length > MaxAnswerLength)
+			{
+				errorToShow = "Answer too long";
+				errorDetails = "Answers must be less than 45 charcaters";
+
+				ErrorMessage(errorToShow, errorDetails);
+
+				return;
+			}
+				
+
+			//If the user is editing amn already existing question, save the edits
 			if (DataToLoad != null)
 			{
 				DataToLoad.question = QuestionField.Text;
@@ -98,6 +138,23 @@ namespace MobileAppClass
 		{
 			base.DidReceiveMemoryWarning();
 			// Release any cached data, images, etc that aren't in use.
+		}
+
+		//Error message
+		public void ErrorMessage(string error, string details)
+		{
+			//Create alert
+			UIAlertController QuestionErrorAlert;
+			QuestionErrorAlert = UIAlertController.Create(error, details, UIAlertControllerStyle.Alert);
+
+			//Create cancel button
+			UIAlertAction CancelButton = UIAlertAction.Create("Okay", UIAlertActionStyle.Cancel, null);
+
+			//Show cancel button
+			QuestionErrorAlert.AddAction(CancelButton);
+
+			//Show the alert
+			this.PresentViewController(QuestionErrorAlert, false, null);
 		}
 	}
 }

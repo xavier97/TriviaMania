@@ -7,11 +7,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EnterDataViewController">
             <connections>
                 <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
-                <outlet property="QuestionField" destination="12" id="name-outlet-12"/>
                 <outlet property="CorrectAnswer" destination="42" id="name-outlet-42"/>
                 <outlet property="false1" destination="51" id="name-outlet-51"/>
                 <outlet property="false2" destination="53" id="name-outlet-53"/>
                 <outlet property="false3" destination="55" id="name-outlet-55"/>
+                <outlet property="QuestionField" destination="92" id="name-outlet-92"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -64,22 +64,12 @@
                         <constraint id="87" firstItem="9" firstAttribute="width" constant="130"/>
                     </constraints>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(250 characters max)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="13" translatesAutoresizingMaskIntoConstraints="NO" adjustsFontSizeToFit="NO" textAlignment="natural" misplaced="YES">
-                    <rect key="frame" x="321" y="174" width="127" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(150 characters max)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="13" translatesAutoresizingMaskIntoConstraints="NO" adjustsFontSizeToFit="NO" textAlignment="natural" misplaced="YES">
+                    <rect key="frame" x="320" y="176" width="127" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" id="12" translatesAutoresizingMaskIntoConstraints="NO" borderStyle="line">
-                    <rect key="frame" x="155" y="89" width="293" height="87"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <constraints>
-                        <constraint id="16" firstItem="12" firstAttribute="height" constant="87"/>
-                        <constraint id="37" firstItem="12" firstAttribute="width" constant="293"/>
-                    </constraints>
-                    <color key="backgroundColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
-                </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="42" translatesAutoresizingMaskIntoConstraints="NO" borderStyle="roundedRect" misplaced="YES">
                     <rect key="frame" x="154" y="224" width="293" height="32"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -112,14 +102,22 @@
                         <constraint id="56" firstItem="55" firstAttribute="width" constant="293"/>
                     </constraints>
                 </textField>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="92" translatesAutoresizingMaskIntoConstraints="NO">
+                    <rect key="frame" x="154" y="90" width="293" height="87"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <constraints>
+                        <constraint id="99" firstItem="92" firstAttribute="height" constant="87"/>
+                        <constraint id="100" firstItem="92" firstAttribute="width" constant="293"/>
+                    </constraints>
+                </textView>
             </subviews>
             <constraints>
                 <constraint id="34" firstItem="5" firstAttribute="top" secondItem="2" secondAttribute="top" constant="69"/>
                 <constraint id="38" firstItem="2" firstAttribute="centerX" secondItem="5" secondAttribute="centerX" constant="105"/>
                 <constraint id="39" firstItem="13" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" constant="84"/>
                 <constraint id="45" firstItem="42" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
-                <constraint id="46" firstItem="42" firstAttribute="top" secondItem="12" secondAttribute="bottom" constant="48"/>
-                <constraint id="48" firstItem="6" firstAttribute="top" secondItem="12" secondAttribute="bottom" constant="27"/>
                 <constraint id="50" firstItem="6" firstAttribute="top" secondItem="2" secondAttribute="top" constant="203"/>
                 <constraint id="57" firstItem="51" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
                 <constraint id="58" firstItem="51" firstAttribute="top" secondItem="42" secondAttribute="bottom" constant="39"/>
@@ -134,9 +132,11 @@
                 <constraint id="68" firstItem="55" firstAttribute="top" secondItem="53" secondAttribute="centerY" constant="51"/>
                 <constraint id="69" firstItem="2" firstAttribute="centerX" secondItem="9" secondAttribute="centerX" constant="81"/>
                 <constraint id="70" firstItem="9" firstAttribute="top" secondItem="53" secondAttribute="bottom" constant="15"/>
-                <constraint id="71" firstItem="12" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" constant="1"/>
-                <constraint id="74" firstItem="13" firstAttribute="top" secondItem="2" secondAttribute="top" constant="174"/>
                 <constraint id="83" firstItem="2" firstAttribute="centerX" secondItem="6" secondAttribute="centerX" constant="77"/>
+                <constraint id="101" firstItem="92" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="102" firstItem="92" firstAttribute="top" secondItem="2" secondAttribute="top" constant="90"/>
+                <constraint id="103" firstItem="42" firstAttribute="top" secondItem="92" secondAttribute="centerY" constant="90"/>
+                <constraint id="117" firstItem="13" firstAttribute="top" secondItem="92" secondAttribute="centerY" constant="42"/>
             </constraints>
         </view>
     </objects>
