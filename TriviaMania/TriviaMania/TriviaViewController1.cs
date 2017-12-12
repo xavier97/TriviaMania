@@ -21,8 +21,7 @@ namespace MobileAppClass
         Stopwatch timePassed;
         List<TriviaQuestionsRecord> ListofTriviaQuestions;
         readonly int maxQuestions = 15; // Maximum # of questions in game
-        readonly int maxTime = 15000; // 15 seconds counted by timer
-        readonly int progressInterval = 1000; // The time bar's timer interval
+        readonly int maxTime = 15000; // 15 seconds counted by timer; also the time bar's timer interval
         int questionNumber = 1; // Initialized to 1 once the game starts
 
         public TriviaViewController1() : base("TriviaViewController1", null)
@@ -102,18 +101,6 @@ namespace MobileAppClass
 
             // todo: this takes forver to display. why??
             BeginTimeFill(); // Begins the timer bar's load
-
-            // Countdown Details
-            timer = new System.Timers.Timer();
-            timer.Interval = maxTime;
-            timer.Enabled = true;
-            timer.Elapsed += Timer_Elapsed;
-
-            // Begin countdown
-            timer.Start();
-            timePassed = new Stopwatch();
-            timePassed.Start();
-
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -121,9 +108,7 @@ namespace MobileAppClass
             base.ViewDidDisappear(animated);
 
             // Kill timers when exited
-            timer.Stop();
-            timerProgression.Stop();
-            timePassed.Stop();
+            EndTimeFill();
         }
 
         public override void DidReceiveMemoryWarning()
@@ -190,21 +175,38 @@ namespace MobileAppClass
         // Handles QuestionTimerProgressBar's set up and functionality
         private void BeginTimeFill()
         {
+            // Countdown Details
+            timer = new Timer();
+            timer.Interval = maxTime;
+            timer.Enabled = true;
+            timer.Elapsed += Timer_Elapsed;
+
+            // Begin countdown (Stopwatch; counts upward for score)
+            timer.Start();
+            timePassed = new Stopwatch();
+            timePassed.Start();
+
             // Progress Bar Details
             timerProgression = new Timer();
-            timerProgression.Interval = progressInterval;
+            timerProgression.Interval = maxTime;
+            timerProgression.Enabled = true;
             timerProgression.Elapsed += (sender, e) =>
             {
                 Console.WriteLine("hello");
                 QuestionTimerProgressBar.Progress -= 1;
             };
-            timerProgression.Enabled = true;
         }
 
         // Kills timer bar and progression
         private void EndTimeFill()
         {
-            timerProgression.Dispose();
+            timer.Stop();
+            timerProgression.Stop();
+            timePassed.Stop();
+
+            // todo: stop ui progress bar from filling
+            //QuestionTimerProgressBar.SetProgress(QuestionTimerProgressBar.Progress, false);
+            QuestionTimerProgressBar.Progress = 0f;
         }
 
         // Handles QuestionTimerProgressBar's aesthetic
@@ -212,7 +214,6 @@ namespace MobileAppClass
         {
             QuestionTimerProgressBar.SetProgress(15, true); // 15 sec interval
             QuestionTimerProgressBar.ProgressTintColor = UIColor.White; // color
-            //QuestionTimerProgressBar.Transform = CGAffineTransform.MakeTranslation(-1.0f, 1.0f); // flip fill
         }
         #endregion
 
@@ -245,8 +246,8 @@ namespace MobileAppClass
                 correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
                 {
                     Console.WriteLine("you win");
-                    // Push "WIN" VC
-                    //this.NavigationController.PopViewController(true);
+                    // todo: Push "WIN" VC; just popping it for now
+                    this.NavigationController.PopViewController(true);
                 };
             }
             else
@@ -303,9 +304,7 @@ namespace MobileAppClass
             });
 
             // Stop all timers when countdown ends
-            timer.Stop();
-            timerProgression.Stop();
-            timePassed.Stop();
+            EndTimeFill();
         }
 
     }
