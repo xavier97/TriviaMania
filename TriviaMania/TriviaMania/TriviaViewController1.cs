@@ -134,7 +134,7 @@ namespace MobileAppClass
             int rndQuestion = RandomSelectGenerator.GetInstance().RandomQuestion(ListofTriviaQuestions.Count);
 
             QuestionLabel.Text = ListofTriviaQuestions[rndQuestion].question;
-            QuestionLabel.TextAlignment = UITextAlignment.Natural;
+            QuestionLabel.TextAlignment = UITextAlignment.Center;
 
             // Finds the correct answer box to "hide" the correct ansswer in
             if (RandomSelectGenerator.GetInstance().AnswerBox() == 1)
