@@ -1,24 +1,51 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 using UIKit;
 
 namespace MobileAppClass
 {
     public partial class MyViewController : UIViewController
     {
+		private List<TriviaQuestionsRecord> StarterQuestionsList = new List<TriviaQuestionsRecord>();
+
         public MyViewController() : base("MyViewController", null)
         {
         }
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-            
+		public override void ViewDidLoad()
+		{
+			base.ViewDidLoad();
+
 			//Add navigation bar title
 			NavigationItem.Title = "Trivia Mania";
 			NavigationController.NavigationBar.BackgroundColor = UIColor.Purple;
 
-        }
+			if (File.Exists(AppDelegate.pathFile) == false)
+			{
+				//Starter Questions
+				TriviaQuestionsRecord Q1 = new TriviaQuestionsRecord("Which body of land is not a contient?",
+																	 "Middle East", "Asia", "Antartica", "Europe");
+				TriviaQuestionsRecord Q2 = new TriviaQuestionsRecord("What day of the year is Christmas?",
+																	 "December 25th", "December 8th", "July 4th", "I'm running out of ideas");
+				TriviaQuestionsRecord Q3 = new TriviaQuestionsRecord("What does the fox say?",
+																	 "Ring-ding-ding-dingeringeding!", "Woof", "Meow", "Toot Toot");
+
+				StarterQuestionsList.Add(Q1);
+				StarterQuestionsList.Add(Q2);
+				StarterQuestionsList.Add(Q3);
+
+				//Write everything to the file
+				var myJson = JsonConvert.SerializeObject(StarterQuestionsList);
+
+				using (var streamwriter = new StreamWriter(AppDelegate.pathFile, false))
+				{
+					streamwriter.Write(myJson);
+				}
+			}
+
+		}
 
         partial void ViewQuestionsButton_TouchUpInside(UIButton sender)
         {

@@ -1,21 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Newtonsoft.Json;
 using UIKit;
 
 namespace MobileAppClass
 {
 	public partial class EnterDataViewController : UIViewController
 	{
+		private List<TriviaQuestionsRecord> TriviaQuestonsList = new List<TriviaQuestionsRecord>();
 		private TriviaQuestionsRecord DataToLoad;
 
 		//Constructors
 //------------------------------------------------------------------------------------------------------------
-		public EnterDataViewController() : base("EnterDataViewController", null)
+		public EnterDataViewController(List<TriviaQuestionsRecord> templist) : base("EnterDataViewController", null)
 		{
+			TriviaQuestonsList = templist;
 		}
 
-		public EnterDataViewController(TriviaQuestionsRecord QuestionObj) : base("EnterDataViewController", null)
+		public EnterDataViewController(TriviaQuestionsRecord QuestionObj, List<TriviaQuestionsRecord> templist) : base("EnterDataViewController", null)
 		{
+			TriviaQuestonsList = templist;
 			DataToLoad = QuestionObj;
 		}
 //------------------------------------------------------------------------------------------------------------
@@ -42,7 +48,48 @@ namespace MobileAppClass
 
 		void SaveTap(object sender, EventArgs e)
 		{
-			//TODO write save logic
+			if (DataToLoad != null)
+			{
+				DataToLoad.question = QuestionField.Text;
+				DataToLoad.answer = CorrectAnswer.Text;
+				DataToLoad.falseQ1 = false1.Text;
+				DataToLoad.falseQ2 = false2.Text;
+				DataToLoad.falseQ3 = false3.Text;
+				DataToLoad.DateCreated = DateTime.Now;
+
+				//Remove old question
+				var itemToRemove = TriviaQuestonsList.Single(r => r.QuestionID == DataToLoad.QuestionID);
+				TriviaQuestonsList.Remove(itemToRemove);
+
+				//Add edited question
+				TriviaQuestonsList.Add(DataToLoad);
+
+				//Save to json file
+				var myJson = JsonConvert.SerializeObject(TriviaQuestonsList);
+
+				using (var streamwriter = new StreamWriter(AppDelegate.pathFile, false))
+				{
+					streamwriter.Write(myJson);
+				}
+
+			}
+			else
+			{
+				//Create new question
+				TriviaQuestionsRecord NewQuestion = new TriviaQuestionsRecord(QuestionField.Text, CorrectAnswer.Text,
+				                                                              false1.Text, false2.Text, false3.Text);
+				//Add to list
+				TriviaQuestonsList.Add(NewQuestion);
+
+				//Save to json file
+				var myJson = JsonConvert.SerializeObject(TriviaQuestonsList);
+
+				using (var streamwriter = new StreamWriter(AppDelegate.pathFile, false))
+				{
+					streamwriter.Write(myJson);
+				}
+
+			}
 
 			NavigationController.PopViewController(true);
 		}
