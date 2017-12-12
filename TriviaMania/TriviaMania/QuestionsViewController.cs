@@ -77,8 +77,7 @@ namespace MobileAppClass
 			public QuestionsTableSource(QuestionsViewController vc_in, List<TriviaQuestionsRecord> templist)
 			{
 				var jsonData = File.ReadAllText(AppDelegate.pathFile);
-				ListofTriviaQuestions = templist;
-				//JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
+				ListofTriviaQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
 
 				vc = vc_in;
 			}

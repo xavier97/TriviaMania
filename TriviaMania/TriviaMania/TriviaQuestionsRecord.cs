@@ -29,6 +29,11 @@ namespace MobileAppClass
 			DateCreated = DateTime.Now;
 		}
 
+		public TriviaQuestionsRecord()
+		{
+			
+		}
+
 		public int GetRandomInt()
 		{
 			Random rand = new Random();
