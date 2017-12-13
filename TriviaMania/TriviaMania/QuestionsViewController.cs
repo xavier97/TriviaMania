@@ -32,7 +32,7 @@ namespace MobileAppClass
 			base.ViewWillAppear(animated);
 
 			//Deserialize json file and add it to a list
-			var jsonData = File.ReadAllText(AppDelegate.pathFile);
+			var jsonData = File.ReadAllText(AppDelegate.triviaPathFile);
 			ListofQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
 
 			//Create Tableview

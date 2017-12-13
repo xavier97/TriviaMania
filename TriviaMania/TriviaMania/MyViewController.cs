@@ -45,7 +45,7 @@ namespace MobileAppClass
 				//Write everything to the file
 				var myJson = JsonConvert.SerializeObject(StarterQuestionsList);
 
-				using (var streamwriter = new StreamWriter(AppDelegate.pathFile, false))
+				using (var streamwriter = new StreamWriter(AppDelegate.triviaPathFile, false))
 				{
 					streamwriter.Write(myJson);
 				}
