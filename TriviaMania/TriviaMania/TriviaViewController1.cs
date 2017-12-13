@@ -251,7 +251,6 @@ namespace MobileAppClass
 			timerProgression.Stop();
 			timePassed.Stop();
 
-			// todo: stop ui progress bar from filling
 			QuestionTimerProgressBar.Progress = 0f;
 		}
 
@@ -272,7 +271,7 @@ namespace MobileAppClass
 		{
 			//Stop the progress timer
 			EndTimeFill();
-			QuestionTimerProgressBar.Progress = 0;
+			//QuestionTimerProgressBar.Progress = 0;
 
 			// +1 number of questions
 			questionNumber++;
@@ -294,18 +293,21 @@ namespace MobileAppClass
 				//If the user answered 15 questions
 				if (questionNumber > maxQuestions)
 				{
-					//UIViewController WinScreen = new UIViewController(new WinViewController());
-
-
+					var WinScreen = new WinViewController();
+					this.PresentViewController(WinScreen, true, null);
+					//return;
 				}
-				//Update question number label
-				questionNumberLabel.Text = questionNumber.ToString();
+				else
+				{
+					//Update question number label
+					questionNumberLabel.Text = questionNumber.ToString();
 
-				// Clear fields and display next question
-				GameSetup();
+					// Clear fields and display next question
+					GameSetup();
 
-				//Reset time
-				BeginTimeFill();
+					//Reset time
+					BeginTimeFill();
+				}
 			};
 		}
 

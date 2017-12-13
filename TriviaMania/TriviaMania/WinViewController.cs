@@ -6,6 +6,7 @@ namespace MobileAppClass
 {
 	public partial class WinViewController : UIViewController
 	{
+		
 		public WinViewController() : base("WinViewController", null)
 		{
 		}
@@ -20,6 +21,12 @@ namespace MobileAppClass
 		{
 			base.DidReceiveMemoryWarning();
 			// Release any cached data, images, etc that aren't in use.
+		}
+
+		partial void ReturnHomeButton_TouchUpInside(UIButton sender)
+		{
+			this.DismissViewController(true, null);
+			NavigationController.DismissViewController(true, null);
 		}
 	}
 }
