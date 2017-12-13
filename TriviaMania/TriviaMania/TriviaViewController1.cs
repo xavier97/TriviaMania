@@ -39,6 +39,7 @@ namespace MobileAppClass
 
 		partial void ReturnHomeButton_TouchUpInside(UIButton sender)
 		{
+			EndTimeFill();
             this.DismissViewController(true, null);
 		}
 
@@ -121,17 +122,14 @@ namespace MobileAppClass
 
 			//read file 
 			var jsonData = File.ReadAllText(AppDelegate.highScorePathFile);
-			using (StreamReader streamreader = new StreamReader(AppDelegate.highScorePathFile))
-			{
-				highScore = streamreader.Read();
-			}
+			displayHighScoreLabel.Text = JsonConvert.DeserializeObject(jsonData).ToString();
 
-			highScoreLabel.Text = highScore.ToString();
+			highScore = Int32.Parse(displayHighScoreLabel.Text);
 
 			congratulationsLabel.Hidden = true;
 			highScoreLabel.Hidden = true;
 			displayHighScoreLabel.Hidden = true;
-			returnHomeButton.Hidden = true;
+			returnHomeButton.SetTitle("Quit", UIControlState.Normal);
 			yourScoreLabel.Hidden = true;
 			finalScoreLabel.Hidden = true;
 		}
@@ -150,6 +148,20 @@ namespace MobileAppClass
 
 			InitTimerBar(); // Reveal timer bar
 			BeginTimeFill(); // Begins the timer bar's load
+		}
+
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(animated);
+
+			if (currentScore > highScore)
+			{
+				//save new highscore
+				using (var streamwriter = new StreamWriter(AppDelegate.highScorePathFile, false))
+				{
+					streamwriter.Write(currentScore);
+				}
+			}
 		}
 
 		public override void ViewDidDisappear(bool animated)
@@ -310,10 +322,10 @@ namespace MobileAppClass
 					questionNumberLabel.Hidden = true;
 					QuestionNumberLabel2.Hidden = true;
 
+					returnHomeButton.SetTitle("Home", UIControlState.Normal);
 					congratulationsLabel.Hidden = false;
 					highScoreLabel.Hidden = false;
 					displayHighScoreLabel.Hidden = false;
-					returnHomeButton.Hidden = false;
 					yourScoreLabel.Hidden = false;
 					finalScoreLabel.Hidden = false;
                 }

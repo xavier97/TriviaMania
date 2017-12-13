@@ -196,7 +196,7 @@
                     </constraints>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="40" translatesAutoresizingMaskIntoConstraints="NO">
-                    <rect key="frame" x="256" y="282" width="87" height="35"/>
+                    <rect key="frame" x="256" y="515" width="87" height="35"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22" weight="heavy"/>
                     <state key="normal" title="Home">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -239,8 +239,8 @@
                 <constraint id="4940" firstItem="22" firstAttribute="top" secondItem="9" secondAttribute="centerY" constant="50"/>
                 <constraint id="4941" firstItem="33" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" constant="57"/>
                 <constraint id="4942" firstItem="33" firstAttribute="top" secondItem="14" secondAttribute="centerY" constant="52"/>
-                <constraint id="4943" firstItem="40" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
-                <constraint id="4944" firstItem="40" firstAttribute="top" secondItem="5" secondAttribute="centerY" constant="203"/>
+                <constraint id="4951" firstItem="40" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="4952" firstItem="40" firstAttribute="top" secondItem="2" secondAttribute="top" constant="515"/>
             </constraints>
             <point key="canvasLocation" x="32" y="28"/>
         </view>
