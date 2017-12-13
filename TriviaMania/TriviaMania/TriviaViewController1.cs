@@ -193,7 +193,7 @@ namespace MobileAppClass
 		private void GameSetup()
 		{
 			// Get a random question from the list and display it
-			int rndQuestion = RandomSelectGenerator.GetInstance().RandomQuestion(ListofTriviaQuestions.Count);
+            int rndQuestion = testRandom.RandomQuestion(ListofTriviaQuestions.Count);
 
             answerBoxSelection = testRandom.AnswerBox();
 
