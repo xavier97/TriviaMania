@@ -25,7 +25,7 @@ namespace MobileAppClass
 		readonly int maxQuestions = 15; // Maximum # of questions in game
 		readonly int maxTime = 15000; // 15 seconds counted by timer; also the time bar's timer interval
 		int questionNumber = 1; // Initialized to 1 once the game starts
-		float currentScore = 0; // The user's current score. They start with 0.
+		int currentScore = 0; // The user's current score. They start with 0.
 
 		public TriviaViewController1() : base("TriviaViewController1", null)
 		{
@@ -42,11 +42,11 @@ namespace MobileAppClass
 			if (RandomSelectGenerator.GetInstance().AnswerBox() == 1)
 			{
 				Console.WriteLine("1");
-				WinState();
+                AnswerState(true);
 			}
 			else
 			{
-				IncorrectAlert();
+                AnswerState(false);
 			}
 		}
 
@@ -55,11 +55,11 @@ namespace MobileAppClass
 			if (RandomSelectGenerator.GetInstance().AnswerBox() == 2)
 			{
 				Console.WriteLine("2");
-				WinState();
+                AnswerState(true);
 			}
 			else
 			{
-				IncorrectAlert();
+                AnswerState(false);
 			}
 		}
 
@@ -68,11 +68,11 @@ namespace MobileAppClass
 			if (RandomSelectGenerator.GetInstance().AnswerBox() == 3)
 			{
 				Console.WriteLine("3");
-				WinState();
+                AnswerState(true);
 			}
 			else
 			{
-				IncorrectAlert();
+                AnswerState(false);
 			}
 		}
 
@@ -81,49 +81,19 @@ namespace MobileAppClass
 			if (RandomSelectGenerator.GetInstance().AnswerBox() == 4)
 			{
 				Console.WriteLine("4");
-				WinState();
+                AnswerState(true);
 			}
 			else
 			{
-				IncorrectAlert();
+                AnswerState(false);
 			}
 		}
 
 		#endregion
 
-		private void IncorrectAlert()
-		{
-            //Stop the progress timer
-            EndTimeFill();
-            QuestionTimerProgressBar.Progress = 0;
-
-            // +1 number of questions
-            questionNumber++;
-
-            // Calculate game score
-            float score = GameScore(timePassed.ElapsedMilliseconds);
-
-			// Point loss for getting it wrong
-			if (currentScore >= 100)
-			{
-				currentScore = currentScore - 100;
-			}
-
-			// Popup alert that the timer is done
-			UIAlertView incorrectAlert = new UIAlertView()
-			{
-				Title = "Incorrect Answer",
-				Message = "Your Score: " + currentScore
-			};
-			incorrectAlert.AddButton("OK");
-			incorrectAlert.Show();
-
-            // On dismiss, show next question
-            incorrectAlert.Dismissed += (object sender, UIButtonEventArgs e) =>
-            {
-                GameSetup();
-            };
-		}
+		//private void IncorrectAlert()
+		//{
+		//}
 
 		public override void ViewDidLoad()
 		{
@@ -251,6 +221,7 @@ namespace MobileAppClass
 			timerProgression.Stop();
 			timePassed.Stop();
 
+            // TODO: Stop UI progress bar from filling?
 			QuestionTimerProgressBar.Progress = 0f;
 		}
 
@@ -267,48 +238,84 @@ namespace MobileAppClass
 		/// End timers and, add to the question count, calculate game score,
 		/// pop-up a confirmation, & determine next question/win screen
 		/// </summary>
-		private void WinState()
+        private void AnswerState(bool win)
 		{
 			//Stop the progress timer
 			EndTimeFill();
-			//QuestionTimerProgressBar.Progress = 0;
 
 			// +1 number of questions
 			questionNumber++;
 
-			// Calculate game score
-			float score = GameScore(timePassed.ElapsedMilliseconds);
+            // Calculate game score
+            float score = GameScore(timePassed.ElapsedMilliseconds, win);
 
-			// Popup alert that the answer was correct
-			UIAlertView correctAlert = new UIAlertView()
-			{
-				Title = "Correct!",
-				Message = "Current Score: " + score
-			};
-			correctAlert.AddButton("OK");
-			correctAlert.Show();
+            // USER ENTERS THE CORRECT ANSWER
+            if (win)
+            {
+                // Popup alert that the answer was correct
+                UIAlertView correctAlert = new UIAlertView()
+                {
+                    Title = "Correct!",
+                    Message = "Current Score: " + score
+                };
+                correctAlert.AddButton("OK");
+                correctAlert.Show();
 
-			correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
-			{
-				//If the user answered 15 questions
-				if (questionNumber > maxQuestions)
-				{
-					var WinScreen = new WinViewController();
-					this.PresentViewController(WinScreen, true, null);
-					//return;
-				}
-				else
-				{
-					//Update question number label
-					questionNumberLabel.Text = questionNumber.ToString();
+                correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
+                {
+					//If the user answered 15 questions
+					if (questionNumber > maxQuestions)
+					{
+						var WinScreen = new WinViewController(currentScore);
+						this.PresentViewController(WinScreen, true, null);
+					}
+					else
+					{
+						// Update question number label
+						questionNumberLabel.Text = questionNumber.ToString();
 
-					// Clear fields and display next question
-					GameSetup();
+						// Clear fields and display next question
+						GameSetup();
 
-					//Reset time
-					BeginTimeFill();
-				}
-			};
+						//Reset time
+						BeginTimeFill();
+					}
+
+                };
+            }
+            else
+            {
+                // Popup alert that the answer is incorrect
+                UIAlertView incorrectAlert = new UIAlertView()
+                {
+                    Title = "Incorrect Answer",
+                    Message = "Your Score: " + score
+                };
+                incorrectAlert.AddButton("OK");
+                incorrectAlert.Show();
+
+                // On dismiss, show next question
+                incorrectAlert.WillDismiss += (object sender, UIButtonEventArgs e) =>
+                {
+					//If the user answered 15 questions
+					if (questionNumber > maxQuestions)
+					{
+						var WinScreen = new WinViewController(currentScore);
+						this.PresentViewController(WinScreen, true, null);
+					}
+					else
+					{
+						// Update question number label
+						questionNumberLabel.Text = questionNumber.ToString();
+
+						// Clear fields and display next question
+						GameSetup();
+
+						//Reset time
+						BeginTimeFill();
+					}
+                };
+            }
 		}
 
 		/// <summary>
@@ -316,70 +323,80 @@ namespace MobileAppClass
 		/// </summary>
 		/// <returns>The score.</returns>
 		/// <param name="secondsPassed">Seconds passed during one question.</param>
-		/// <param name="workingScore">The current score the user has.</param>
-		private float GameScore(float secondsPassed)
+        /// <param name="win">Whether the user won or lost the round</param>
+		private float GameScore(float secondsPassed, bool win)
 		{
-			// Calculate based on time user answered the question
-			if (secondsPassed <= 1500f && secondsPassed > 1400f)
-			{
-				currentScore = currentScore + 100;
-			}
-			else if (secondsPassed <= 14000 && secondsPassed > 13000)
-			{
-				currentScore = currentScore + 200;
-			}
-			else if (secondsPassed <= 13000 && secondsPassed > 12000)
-			{
-				currentScore = currentScore + 300;
-			}
-			else if (secondsPassed <= 12000 && secondsPassed > 11000)
-			{
-				currentScore = currentScore + 400;
-			}
-			else if (secondsPassed <= 11000 && secondsPassed > 10000)
-			{
-				currentScore = currentScore + 500;
-			}
-			else if (secondsPassed <= 10000 && secondsPassed > 9000)
-			{
-				currentScore = currentScore + 600;
-			}
-			else if (secondsPassed <= 9000 && secondsPassed > 8000)
-			{
-				currentScore = currentScore + 700;
-			}
-			else if (secondsPassed <= 8000 && secondsPassed > 7000)
-			{
-				currentScore = currentScore + 800;
-			}
-			else if (secondsPassed <= 7000 && secondsPassed > 6000)
-			{
-				currentScore = currentScore + 900;
-			}
-			else if (secondsPassed <= 6000 && secondsPassed > 5000)
-			{
-				currentScore = currentScore + 1000;
-			}
-			else if (secondsPassed <= 5000 && secondsPassed > 4000)
-			{
-				currentScore = currentScore + 1100;
-			}
-			else if (secondsPassed <= 4000 && secondsPassed > 3000)
-			{
-				currentScore = currentScore + 1200;
-			}
-			else if (secondsPassed <= 3000 && secondsPassed > 2000)
-			{
-				currentScore = currentScore + 1300;
-			}
-			else if (secondsPassed <= 2000 && secondsPassed > 1000)
-			{
-				currentScore = currentScore + 1400;
-			}
-			else if (secondsPassed <= 1000 && secondsPassed > 0)
-			{
-				currentScore = currentScore + 1500;
-			}
+            if (win)
+            {
+                // Calculate based on time user answered the question
+                if (secondsPassed <= 1500f && secondsPassed > 1400f)
+                {
+                    currentScore = currentScore + 100;
+                }
+                else if (secondsPassed <= 14000 && secondsPassed > 13000)
+                {
+                    currentScore = currentScore + 200;
+                }
+                else if (secondsPassed <= 13000 && secondsPassed > 12000)
+                {
+                    currentScore = currentScore + 300;
+                }
+                else if (secondsPassed <= 12000 && secondsPassed > 11000)
+                {
+                    currentScore = currentScore + 400;
+                }
+                else if (secondsPassed <= 11000 && secondsPassed > 10000)
+                {
+                    currentScore = currentScore + 500;
+                }
+                else if (secondsPassed <= 10000 && secondsPassed > 9000)
+                {
+                    currentScore = currentScore + 600;
+                }
+                else if (secondsPassed <= 9000 && secondsPassed > 8000)
+                {
+                    currentScore = currentScore + 700;
+                }
+                else if (secondsPassed <= 8000 && secondsPassed > 7000)
+                {
+                    currentScore = currentScore + 800;
+                }
+                else if (secondsPassed <= 7000 && secondsPassed > 6000)
+                {
+                    currentScore = currentScore + 900;
+                }
+                else if (secondsPassed <= 6000 && secondsPassed > 5000)
+                {
+                    currentScore = currentScore + 1000;
+                }
+                else if (secondsPassed <= 5000 && secondsPassed > 4000)
+                {
+                    currentScore = currentScore + 1100;
+                }
+                else if (secondsPassed <= 4000 && secondsPassed > 3000)
+                {
+                    currentScore = currentScore + 1200;
+                }
+                else if (secondsPassed <= 3000 && secondsPassed > 2000)
+                {
+                    currentScore = currentScore + 1300;
+                }
+                else if (secondsPassed <= 2000 && secondsPassed > 1000)
+                {
+                    currentScore = currentScore + 1400;
+                }
+                else if (secondsPassed <= 1000 && secondsPassed >= 0)
+                {
+                    currentScore = currentScore + 1500;
+                }
+            }
+            else
+            {
+                if (currentScore > 100)
+                {
+                    currentScore = currentScore - 100;
+                }
+            }
 
 			return currentScore;
 		}
@@ -393,15 +410,14 @@ namespace MobileAppClass
 		{
 			InvokeOnMainThread(() =>
 			{
-
-				// Calculate game score
-				float score = GameScore(timePassed.ElapsedMilliseconds);
+                // Calculate game score; Point loss for running out of time
+                GameScore(timePassed.ElapsedMilliseconds, false);
 
 				// Popup alert that the timer is done
 				UIAlertView timeAlert = new UIAlertView()
 				{
 					Title = "Time's Up!",
-					Message = "Final Score: " + score
+                    Message = "Final Score: " + currentScore
 				};
 				timeAlert.AddButton("OK");
 				timeAlert.Show();
@@ -418,6 +434,9 @@ namespace MobileAppClass
 			EndTimeFill();
 		}
 
+        /// <summary>
+        /// Updated the time progress bar with each ellapse
+        /// </summary>
 		void TimerProgression_Elapsed(object sender, ElapsedEventArgs e)
 		{
 			Console.WriteLine("hello");
@@ -427,6 +446,4 @@ namespace MobileAppClass
 			});
 		}
 	}
-//Helllooooooooo
-
 }
