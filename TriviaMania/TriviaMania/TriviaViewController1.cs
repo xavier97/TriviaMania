@@ -43,6 +43,10 @@ namespace MobileAppClass
                 Console.WriteLine("1");
                 WinState();
             }
+            else
+            {
+                IncorrectAlert();
+            }
         }
 
         partial void AnswerButton2_TouchUpInside(UIButton sender)
@@ -51,6 +55,10 @@ namespace MobileAppClass
             {
                 Console.WriteLine("2");
                 WinState();
+            }
+            else
+            {
+                IncorrectAlert();
             }
         }
 
@@ -61,6 +69,10 @@ namespace MobileAppClass
                 Console.WriteLine("3");
                 WinState();
             }
+            else
+            {
+                IncorrectAlert();
+            }
         }
 
         partial void AnswerButton4_TouchUpInside(UIButton sender)
@@ -70,9 +82,31 @@ namespace MobileAppClass
                 Console.WriteLine("4");
                 WinState();
             }
+            else
+            {
+                IncorrectAlert();
+            }
         }
 
         #endregion
+
+        private void IncorrectAlert()
+        {
+            // Point loss for getting it wrong
+            if (currentScore >= 100)
+            {
+                currentScore = currentScore - 100;
+            }
+
+            // Popup alert that the timer is done
+            UIAlertView incorrectAlert = new UIAlertView()
+            {
+                Title = "Incorrect Answer",
+                Message = "Your Score: " + currentScore
+            };
+            incorrectAlert.AddButton("OK");
+            incorrectAlert.Show();
+        }
 
         public override void ViewDidLoad()
         {
