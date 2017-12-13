@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 using UIKit;
 using CoreGraphics;
@@ -24,6 +24,7 @@ namespace MobileAppClass
         readonly int maxQuestions = 15; // Maximum # of questions in game
         readonly int maxTime = 15000; // 15 seconds counted by timer; also the time bar's timer interval
 		int questionNumber = 1; // Initialized to 1 once the game starts
+        float currentScore = 0; // The user's current score. They start with 0.
 
         public TriviaViewController1() : base("TriviaViewController1", null)
         {
@@ -211,6 +212,8 @@ namespace MobileAppClass
 
         /// <summary>
         /// When the user selects the correct answer.
+        /// End timers and, add to the question count, calculate game score,
+        /// pop-up a confirmation, & determine next question/win screen
         /// </summary>
 		private void WinState()
         {
@@ -222,7 +225,8 @@ namespace MobileAppClass
             questionNumber++;
 
             // Calculate game score
-            int score = GameScore(timePassed.ElapsedMilliseconds);
+            Console.WriteLine(timePassed.ElapsedMilliseconds);
+            float score = GameScore(timePassed.ElapsedMilliseconds);
 
             // Popup alert that the answer was correct
             UIAlertView correctAlert = new UIAlertView()
@@ -243,7 +247,7 @@ namespace MobileAppClass
                     this.NavigationController.PopViewController(true);
                 };
             }
-            else
+            else // Keep playing
             {
                 correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
                 {
@@ -265,38 +269,85 @@ namespace MobileAppClass
         /// </summary>
         /// <returns>The score.</returns>
         /// <param name="secondsPassed">Seconds passed during one question.</param>
-        private float GameScore(float secondsPassed, float currentScore)
+        /// <param name="workingScore">The current score the user has.</param>
+        private float GameScore(float secondsPassed)
         {
-            float score = currentScore;
-
             // Calculate based on time user answered the question
-            switch (secondsPassed)
+            if (secondsPassed <= 1500f && secondsPassed > 1400f)
             {
-                case float x when (x < 15000) && (x > 14000):
-                    Console.WriteLine("case 1");
-                    score = score + 100;
-                    break;
-                case float x when (x < 15) && (x > 14):
-                    Console.WriteLine("case 2");
-                    break;
-                case float x when (x < 15) && (x > 14):
-                    Console.WriteLine("case 3");
-                    break;
+                currentScore = currentScore + 100;
+            }
+            else if (secondsPassed <= 14000 && secondsPassed > 13000)
+            {
+                currentScore = currentScore + 200;
+            }
+            else if (secondsPassed <= 13000 && secondsPassed > 12000)
+            {
+                currentScore = currentScore + 300;
+            }
+            else if (secondsPassed <= 12000 && secondsPassed > 11000)
+            {
+                currentScore = currentScore + 400;
+            }
+            else if (secondsPassed <= 11000 && secondsPassed > 10000)
+            {
+                currentScore = currentScore + 500;
+            }
+            else if (secondsPassed <= 10000 && secondsPassed > 9000)
+            {
+                currentScore = currentScore + 600;
+            }
+            else if (secondsPassed <= 9000 && secondsPassed > 8000)
+            {
+                currentScore = currentScore + 700;
+            }
+            else if (secondsPassed <= 8000 && secondsPassed > 7000)
+            {
+                currentScore = currentScore + 800;
+            }
+            else if (secondsPassed <= 7000 && secondsPassed > 6000)
+            {
+                currentScore = currentScore + 900;
+            }
+            else if (secondsPassed <= 6000 && secondsPassed > 5000)
+            {
+                currentScore = currentScore + 1000;
+            }
+            else if (secondsPassed <= 5000 && secondsPassed > 4000)
+            {
+                currentScore = currentScore + 1100;
+            }
+            else if (secondsPassed <= 4000 && secondsPassed > 3000)
+            {
+                currentScore = currentScore + 1200;
+            }
+            else if (secondsPassed <= 3000 && secondsPassed > 2000)
+            {
+                currentScore = currentScore + 1300;
+            }
+            else if (secondsPassed <= 2000 && secondsPassed > 1000)
+            {
+                currentScore = currentScore+ 1400;
+            }
+            else if (secondsPassed <= 1000 && secondsPassed > 0)
+            {
+                currentScore = currentScore + 1500;
             }
 
-            return score;
+            return currentScore;
         }
 
         /// <summary>
         /// Events that happen if the user 
-        /// runs out of time on a question
+        /// runs out of time on a question:
+        /// Calculate game score, show the final score in a pop-up, and end timers.
         /// </summary>
         void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             InvokeOnMainThread(() => {
 
                 // Calculate game score
-                int score = GameScore(timePassed.ElapsedMilliseconds);
+                float score = GameScore(timePassed.ElapsedMilliseconds);
 
                 // Popup alert that the timer is done
                 UIAlertView timeAlert = new UIAlertView()
