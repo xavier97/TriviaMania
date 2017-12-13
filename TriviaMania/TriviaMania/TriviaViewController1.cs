@@ -30,7 +30,7 @@ namespace MobileAppClass
         {
             // Initialize the list and convert Json from local storage to list
             ListofTriviaQuestions = new List<TriviaQuestionsRecord>();
-            var jsonData = File.ReadAllText(AppDelegate.pathFile);
+            var jsonData = File.ReadAllText(AppDelegate.triviaPathFile);
             ListofTriviaQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
         }
 
