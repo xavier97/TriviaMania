@@ -21,7 +21,7 @@ namespace MobileAppClass
 		Timer timerProgression = new Timer();
 		Stopwatch timePassed = new Stopwatch();
 		List<TriviaQuestionsRecord> ListofTriviaQuestions;
-        int answerBoxSelection;
+        int answerBoxSelection; // The randomly chosen box to hold the correct answer
 		readonly int maxQuestions = 15; // Maximum # of questions in game
 		readonly int maxTime = 15000; // 15 seconds counted by timer; also the time bar's timer interval
 		int questionNumber = 1; // Initialized to 1 once the game starts
@@ -129,7 +129,6 @@ namespace MobileAppClass
 		{
 			base.ViewDidAppear(animated);
 
-			// todo: this takes forver to display. why??
 			InitTimerBar(); // Reveal timer bar
 			BeginTimeFill(); // Begins the timer bar's load
 		}
@@ -140,6 +139,9 @@ namespace MobileAppClass
 
 			// Kill timers when exited
 			EndTimeFill();
+
+            // Clear questions already played list
+
 		}
 
 		public override void DidReceiveMemoryWarning()
@@ -220,6 +222,7 @@ namespace MobileAppClass
 			timer.Stop();
 			timerProgression.Stop();
 			timePassed.Stop();
+            timePassed.Reset(); // Makes timePassed go back to 0.
 
             // TODO: Stop UI progress bar from filling?
 			QuestionTimerProgressBar.Progress = 0f;
@@ -240,50 +243,46 @@ namespace MobileAppClass
 		/// </summary>
         private void AnswerState(bool win)
 		{
+            // Calculate game score
+            float score = GameScore(timePassed.ElapsedMilliseconds, win);
+
 			//Stop the progress timer
 			EndTimeFill();
 
 			// +1 number of questions
 			questionNumber++;
 
-            // Calculate game score
-            float score = GameScore(timePassed.ElapsedMilliseconds, win);
-
-            // USER ENTERS THE CORRECT ANSWER
+            // The alert title to show to the user
+            var alertTitle = "";
             if (win)
             {
-                // Popup alert that the answer was correct
-                UIAlertView correctAlert = new UIAlertView()
-                {
-                    Title = "Correct!",
-                    Message = "Current Score: " + score
-                };
-                correctAlert.AddButton("OK");
-                correctAlert.Show();
-
-                correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
-                {
-                    //If the user answered 15 questions
-                    if (questionNumber > maxQuestions)
-                    {
-                        //UIViewController WinScreen = new UIViewController(new WinViewController());
-                    }
-
-                };
+                alertTitle = "Correct!";
             }
             else
             {
-                // Popup alert that the answer is incorrect
-                UIAlertView incorrectAlert = new UIAlertView()
-                {
-                    Title = "Incorrect Answer",
-                    Message = "Your Score: " + score
-                };
-                incorrectAlert.AddButton("OK");
-                incorrectAlert.Show();
+                alertTitle = "Incorrect!";
+            }
 
-                // On dismiss, show next question
-                incorrectAlert.WillDismiss += (object sender, UIButtonEventArgs e) =>
+            // The alert description to the user
+            var alertDescription = "Current Score: " + score;
+
+            // Popup alert that the answer was correct/incorrect
+            UIAlertView alert = new UIAlertView()
+            {
+                Title = alertTitle,
+                Message = alertDescription
+            };
+            alert.AddButton("OK");
+            alert.Show();
+
+            alert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
+            {
+                //If the user answered 15 questions
+                if (questionNumber > maxQuestions)
+                {
+                    //UIViewController WinScreen = new UIViewController(new WinViewController());
+                }
+                else
                 {
                     // Update question number label
                     questionNumberLabel.Text = questionNumber.ToString();
@@ -293,17 +292,9 @@ namespace MobileAppClass
 
                     //Reset time
                     BeginTimeFill();
-                };
-            }
+                }
 
-            // Update question number label
-            questionNumberLabel.Text = questionNumber.ToString();
-
-            // Clear fields and display next question
-            GameSetup();
-
-            //Reset time
-            BeginTimeFill();
+            };
 		}
 
 		/// <summary>

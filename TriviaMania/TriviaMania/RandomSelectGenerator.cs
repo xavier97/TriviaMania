@@ -52,6 +52,8 @@ namespace MobileAppClass
 
     public class RandNumGen2
     {
+        private List<int> pickedQuestions = new List<int>(); // Questions already asked
+
         public RandNumGen2()
         {
         }
@@ -73,8 +75,6 @@ namespace MobileAppClass
             Random rnd = new Random();
             int questionNumber = rnd.Next(0, numOfListQuestions);
 
-            List<int> pickedQuestions = new List<int>(); // Questions already asked
-
             while (pickedQuestions.Contains(questionNumber))
             {
                 questionNumber = rnd.Next(0, numOfListQuestions);
@@ -84,5 +84,10 @@ namespace MobileAppClass
             return questionNumber;
         }
 
+
+        public void clearSelected()
+        {
+            pickedQuestions.Clear();
+        }
     }
 }
