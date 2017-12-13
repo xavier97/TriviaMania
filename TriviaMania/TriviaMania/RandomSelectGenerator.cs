@@ -59,7 +59,7 @@ namespace MobileAppClass
         }
 
         // Returns the correct answer box
-        public static int AnswerBox()
+        public int AnswerBox()
         {
             Random rnd = new Random();
             int answerButtonNumber = rnd.Next(1, 5);

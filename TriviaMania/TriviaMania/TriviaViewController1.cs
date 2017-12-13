@@ -21,6 +21,7 @@ namespace MobileAppClass
 		Timer timerProgression = new Timer();
 		Stopwatch timePassed = new Stopwatch();
 		List<TriviaQuestionsRecord> ListofTriviaQuestions;
+        RandNumGen2 testRandom = new RandNumGen2();
         int answerBoxSelection; // The randomly chosen box to hold the correct answer
 		readonly int maxQuestions = 15; // Maximum # of questions in game
 		readonly int maxTime = 15000; // 15 seconds counted by timer; also the time bar's timer interval
@@ -46,7 +47,7 @@ namespace MobileAppClass
 
 		partial void AnswerButton1_TouchUpInside(UIButton sender)
 		{
-			if (RandomSelectGenerator.GetInstance().AnswerBox() == 1)
+            if (answerBoxSelection == 1)
 			{
 				Console.WriteLine("1");
                 AnswerState(true);
@@ -59,7 +60,7 @@ namespace MobileAppClass
 
 		partial void AnswerButton2_TouchUpInside(UIButton sender)
 		{
-			if (RandomSelectGenerator.GetInstance().AnswerBox() == 2)
+            if (answerBoxSelection == 2)
 			{
 				Console.WriteLine("2");
                 AnswerState(true);
@@ -72,7 +73,7 @@ namespace MobileAppClass
 
 		partial void AnswerButton3_TouchUpInside(UIButton sender)
 		{
-			if (RandomSelectGenerator.GetInstance().AnswerBox() == 3)
+            if (answerBoxSelection == 3)
 			{
 				Console.WriteLine("3");
                 AnswerState(true);
@@ -85,7 +86,7 @@ namespace MobileAppClass
 
 		partial void AnswerButton4_TouchUpInside(UIButton sender)
 		{
-			if (RandomSelectGenerator.GetInstance().AnswerBox() == 4)
+            if (answerBoxSelection == 4)
 			{
 				Console.WriteLine("4");
                 AnswerState(true);
@@ -97,10 +98,6 @@ namespace MobileAppClass
 		}
 
 		#endregion
-
-		//private void IncorrectAlert()
-		//{
-		//}
 
 		public override void ViewDidLoad()
 		{
@@ -175,6 +172,7 @@ namespace MobileAppClass
 			EndTimeFill();
 
             // Clear questions already played list
+            testRandom.clearSelected();
 		}
 
 		public override void DidReceiveMemoryWarning()
@@ -191,13 +189,13 @@ namespace MobileAppClass
 			// Get a random question from the list and display it
 			int rndQuestion = RandomSelectGenerator.GetInstance().RandomQuestion(ListofTriviaQuestions.Count);
 
-            answerBoxSelection = RandNumGen2.AnswerBox();
+            answerBoxSelection = testRandom.AnswerBox();
 
 			QuestionLabel.Text = ListofTriviaQuestions[rndQuestion].question;
 			QuestionLabel.TextAlignment = UITextAlignment.Center;
 
 			// Finds the correct answer box to "hide" the correct ansswer in
-			if (RandomSelectGenerator.GetInstance().AnswerBox() == 1)
+            if (answerBoxSelection == 1)
 			{
 				// Correct Answer
 				AnswerButton1.SetTitle(ListofTriviaQuestions[rndQuestion].answer, UIControlState.Normal);
@@ -207,7 +205,7 @@ namespace MobileAppClass
 				AnswerButton3.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ3, UIControlState.Normal);
 				AnswerButton4.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ1, UIControlState.Normal);
 			}
-			else if (RandomSelectGenerator.GetInstance().AnswerBox() == 2)
+            else if (answerBoxSelection == 2)
 			{
 				// Correct Answer
 				AnswerButton2.SetTitle(ListofTriviaQuestions[rndQuestion].answer, UIControlState.Normal);
@@ -217,7 +215,7 @@ namespace MobileAppClass
 				AnswerButton3.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ3, UIControlState.Normal);
 				AnswerButton4.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ2, UIControlState.Normal);
 			}
-			else if (RandomSelectGenerator.GetInstance().AnswerBox() == 3)
+            else if (answerBoxSelection == 3)
 			{
 				// Correct Answer
 				AnswerButton3.SetTitle(ListofTriviaQuestions[rndQuestion].answer, UIControlState.Normal);
@@ -227,7 +225,7 @@ namespace MobileAppClass
 				AnswerButton4.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ2, UIControlState.Normal);
 				AnswerButton2.SetTitle(ListofTriviaQuestions[rndQuestion].falseQ3, UIControlState.Normal);
 			}
-			else if (RandomSelectGenerator.GetInstance().AnswerBox() == 4)
+            else if (answerBoxSelection == 4)
 			{
 				// Correct Answer
 				AnswerButton4.SetTitle(ListofTriviaQuestions[rndQuestion].answer, UIControlState.Normal);
@@ -342,7 +340,6 @@ namespace MobileAppClass
                     //Reset time
                     BeginTimeFill();
                 }
-
             };
 		}
 
@@ -450,7 +447,7 @@ namespace MobileAppClass
 				timeAlert.AddButton("OK");
 				timeAlert.Show();
 
-				// Pop when user acknowledges they lost
+                // TODO: When user acknowledges they lost, show next queston
 				timeAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
 				{
 					this.NavigationController.PopViewController(true);
