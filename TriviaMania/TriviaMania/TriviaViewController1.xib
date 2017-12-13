@@ -25,8 +25,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="151" misplaced="YES">
-                    <rect key="frame" x="14" y="88" width="298" height="201"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="151">
+                    <rect key="frame" x="151" y="77" width="298" height="201"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="298" id="971"/>
                         <constraint firstAttribute="height" constant="201" id="993"/>
@@ -44,12 +44,8 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2473">
-                    <rect key="frame" x="8" y="354" width="150" height="65"/>
+                    <rect key="frame" x="151" y="310" width="298" height="35"/>
                     <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="150" id="2492"/>
-                        <constraint firstAttribute="height" constant="65" id="2493"/>
-                    </constraints>
                     <state key="normal" title="Button"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -59,14 +55,14 @@
                     <connections>
                         <action selector="AnswerButton1_TouchUpInside:" destination="-1" id="4489" eventType="touchUpInside"/>
                     </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2484">
-                    <rect key="frame" x="166" y="354" width="150" height="65"/>
-                    <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="150" id="2496"/>
-                        <constraint firstAttribute="height" constant="65" id="2497"/>
+                        <constraint id="4842" firstItem="2473" firstAttribute="width" constant="298"/>
+                        <constraint id="4843" firstItem="2473" firstAttribute="height" constant="35"/>
                     </constraints>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2484" misplaced="YES">
+                    <rect key="frame" x="151" y="353" width="298" height="35"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="Button"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -76,14 +72,14 @@
                     <connections>
                         <action selector="AnswerButton2_TouchUpInside:" destination="-1" id="4748" eventType="touchUpInside"/>
                     </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2485">
-                    <rect key="frame" x="166" y="435" width="150" height="65"/>
-                    <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="150" id="2505"/>
-                        <constraint firstAttribute="height" constant="65" id="2506"/>
+                        <constraint id="4844" firstItem="2484" firstAttribute="width" constant="298"/>
+                        <constraint id="4845" firstItem="2484" firstAttribute="height" constant="35"/>
                     </constraints>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2485" misplaced="YES">
+                    <rect key="frame" x="151" y="437" width="298" height="35"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="Button"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -93,14 +89,14 @@
                     <connections>
                         <action selector="AnswerButton4_TouchUpInside:" destination="-1" id="4818" eventType="touchUpInside"/>
                     </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2486">
-                    <rect key="frame" x="8" y="435" width="150" height="65"/>
-                    <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="150" id="2500"/>
-                        <constraint firstAttribute="height" constant="65" id="2501"/>
+                        <constraint id="4854" firstItem="2485" firstAttribute="width" constant="298"/>
+                        <constraint id="4855" firstItem="2485" firstAttribute="height" constant="35"/>
                     </constraints>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2486" misplaced="YES">
+                    <rect key="frame" x="151" y="395" width="298" height="35"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.92549019607843142" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="Button"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -110,34 +106,57 @@
                     <connections>
                         <action selector="AnswerButton3_TouchUpInside:" destination="-1" id="4783" eventType="touchUpInside"/>
                     </connections>
+                    <constraints>
+                        <constraint id="4850" firstItem="2486" firstAttribute="width" constant="298"/>
+                        <constraint id="4851" firstItem="2486" firstAttribute="height" constant="35"/>
+                    </constraints>
                 </button>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0" translatesAutoresizingMaskIntoConstraints="NO" id="2487" misplaced="YES">
-                    <rect key="frame" x="8" y="322" width="304" height="2"/>
+                    <rect key="frame" x="148" y="298" width="304" height="2"/>
+                    <constraints>
+                        <constraint id="4836" firstItem="2487" firstAttribute="width" constant="304"/>
+                        <constraint id="4837" firstItem="2487" firstAttribute="height" constant="5"/>
+                    </constraints>
                 </progressView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4821" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
-                    <rect key="frame" x="279" y="524" width="42" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4821" translatesAutoresizingMaskIntoConstraints="NO">
+                    <rect key="frame" x="309" y="476" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <constraints>
+                        <constraint id="4858" firstItem="4821" firstAttribute="width" constant="42"/>
+                        <constraint id="4859" firstItem="4821" firstAttribute="height" constant="21"/>
+                    </constraints>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4833" translatesAutoresizingMaskIntoConstraints="NO">
+                    <rect key="frame" x="245" y="476" width="76" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <constraints>
+                        <constraint id="4860" firstItem="4833" firstAttribute="width" constant="76"/>
+                        <constraint id="4861" firstItem="4833" firstAttribute="height" constant="21"/>
+                    </constraints>
                 </label>
             </subviews>
             <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.66274509803921566" green="0.33333333333333331" blue="0.9882352941176471" alpha="1"/>
             <constraints>
-                <constraint firstItem="151" firstAttribute="top" secondItem="2" secondAttribute="top" constant="88" id="927"/>
-                <constraint firstItem="151" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" constant="3" id="949"/>
-                <constraint firstItem="2487" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="2488"/>
-                <constraint firstItem="2487" firstAttribute="top" secondItem="151" secondAttribute="bottom" constant="33" id="2489"/>
-                <constraint firstItem="2487" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="8" id="2490"/>
-                <constraint firstItem="2473" firstAttribute="top" secondItem="2487" secondAttribute="bottom" constant="30" id="2491"/>
-                <constraint firstItem="2473" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="8" id="2494"/>
-                <constraint firstItem="2484" firstAttribute="leading" secondItem="2473" secondAttribute="trailing" constant="8" id="2495"/>
-                <constraint firstItem="2484" firstAttribute="top" secondItem="2487" secondAttribute="bottom" constant="30" id="2498"/>
-                <constraint firstItem="2486" firstAttribute="top" secondItem="2473" secondAttribute="bottom" constant="16" id="2499"/>
-                <constraint firstItem="2486" firstAttribute="centerX" secondItem="2473" secondAttribute="centerX" id="2503"/>
-                <constraint firstItem="2485" firstAttribute="centerX" secondItem="2484" secondAttribute="centerX" id="2504"/>
-                <constraint firstItem="2485" firstAttribute="top" secondItem="2484" secondAttribute="bottom" constant="16" id="2507"/>
-                <constraint id="4823" firstItem="4821" firstAttribute="top" secondItem="2485" secondAttribute="bottom" constant="20"/>
-                <constraint id="4824" firstItem="4821" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="4834" firstItem="151" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="4838" firstItem="2487" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="4839" firstItem="2487" firstAttribute="top" secondItem="151" secondAttribute="bottom" constant="17"/>
+                <constraint id="4840" firstItem="2473" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="4846" firstItem="2484" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="4848" firstItem="2486" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="4852" firstItem="2485" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="4856" firstItem="4821" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" constant="30"/>
+                <constraint id="4857" firstItem="4821" firstAttribute="top" secondItem="2485" secondAttribute="centerY" constant="25"/>
+                <constraint id="4862" firstItem="2" firstAttribute="centerX" secondItem="4833" secondAttribute="centerX" constant="17"/>
+                <constraint id="4863" firstItem="4833" firstAttribute="top" secondItem="2485" secondAttribute="centerY" constant="25"/>
+                <constraint id="4866" firstItem="151" firstAttribute="top" secondItem="2" secondAttribute="top" constant="77"/>
+                <constraint id="4869" firstItem="2473" firstAttribute="top" secondItem="2487" secondAttribute="centerY" constant="11"/>
+                <constraint id="4870" firstItem="2484" firstAttribute="top" secondItem="2473" secondAttribute="centerY" constant="25"/>
+                <constraint id="4871" firstItem="2486" firstAttribute="top" secondItem="2484" secondAttribute="centerY" constant="24"/>
+                <constraint id="4872" firstItem="2485" firstAttribute="top" secondItem="2486" secondAttribute="centerY" constant="24"/>
             </constraints>
             <point key="canvasLocation" x="32" y="28"/>
         </view>
