@@ -20,9 +20,12 @@ namespace MobileAppClass
 			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
 
-			//Deserialize json file and add it to a list
+			//read file 
 			var jsonData = File.ReadAllText(AppDelegate.highScorePathFile);
-			highScore = (int)JsonConvert.DeserializeObject(jsonData);
+			using (StreamReader streamreader = new StreamReader(AppDelegate.highScorePathFile))
+			{
+				highScore  = streamreader.Read();	
+			}
 			highScoreLabel.Text = highScore.ToString();
 
 			scoreLabel.Text = score.ToString();
@@ -35,11 +38,9 @@ namespace MobileAppClass
 			if (score > highScore)
 			{
 				//save new highscore
-				var myJson = JsonConvert.SerializeObject(highScore);
-
 				using (var streamwriter = new StreamWriter(AppDelegate.highScorePathFile, false))
 				{
-					streamwriter.Write(myJson);
+					streamwriter.Write(score);
 				}
 			}
 		}
@@ -53,7 +54,6 @@ namespace MobileAppClass
 		partial void ReturnHomeButton_TouchUpInside(UIButton sender)
 		{
 			this.DismissViewController(true, null);
-			//NavigationController.DismissViewController(true, null);
 		}
 	}
 }

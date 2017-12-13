@@ -26,6 +26,7 @@ namespace MobileAppClass
 		readonly int maxTime = 15000; // 15 seconds counted by timer; also the time bar's timer interval
 		int questionNumber = 1; // Initialized to 1 once the game starts
 		int currentScore = 0; // The user's current score. They start with 0.
+		int highScore;
 
 		public TriviaViewController1() : base("TriviaViewController1", null)
 		{
@@ -33,6 +34,11 @@ namespace MobileAppClass
 			ListofTriviaQuestions = new List<TriviaQuestionsRecord>();
 			var jsonData = File.ReadAllText(AppDelegate.triviaPathFile);
 			ListofTriviaQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
+		}
+
+		partial void ReturnHomeButton_TouchUpInside(UIButton sender)
+		{
+            this.DismissViewController(true, null);
 		}
 
 		#region Answer Buttons
@@ -115,6 +121,22 @@ namespace MobileAppClass
 			questionLabelMargins.Right = 10f;
 			questionLabelMargins.Top = 0.5f;
 			QuestionLabel.Layer.BorderWidth = 3.5f;
+
+			//read file 
+			var jsonData = File.ReadAllText(AppDelegate.highScorePathFile);
+			using (StreamReader streamreader = new StreamReader(AppDelegate.highScorePathFile))
+			{
+				highScore = streamreader.Read();
+			}
+
+			highScoreLabel.Text = highScore.ToString();
+
+			congratulationsLabel.Hidden = true;
+			highScoreLabel.Hidden = true;
+			displayHighScoreLabel.Hidden = true;
+			returnHomeButton.Hidden = true;
+			yourScoreLabel.Hidden = true;
+			finalScoreLabel.Hidden = true;
 		}
 
 		public override void ViewWillAppear(bool animated)
@@ -141,7 +163,6 @@ namespace MobileAppClass
 			EndTimeFill();
 
             // Clear questions already played list
-
 		}
 
 		public override void DidReceiveMemoryWarning()
@@ -280,7 +301,23 @@ namespace MobileAppClass
                 //If the user answered 15 questions
                 if (questionNumber > maxQuestions)
                 {
-                    //UIViewController WinScreen = new UIViewController(new WinViewController());
+					finalScoreLabel.Text = currentScore.ToString();
+
+					QuestionLabel.Hidden = true;
+					QuestionTimerProgressBar.Hidden = true;
+					AnswerButton1.Hidden = true;
+					AnswerButton2.Hidden = true;
+					AnswerButton3.Hidden = true;
+					AnswerButton4.Hidden = true;
+					questionNumberLabel.Hidden = true;
+					QuestionNumberLabel2.Hidden = true;
+
+					congratulationsLabel.Hidden = false;
+					highScoreLabel.Hidden = false;
+					displayHighScoreLabel.Hidden = false;
+					returnHomeButton.Hidden = false;
+					yourScoreLabel.Hidden = false;
+					finalScoreLabel.Hidden = false;
                 }
                 else
                 {
