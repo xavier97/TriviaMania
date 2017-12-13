@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace MobileAppClass
 {
@@ -214,15 +215,15 @@ namespace MobileAppClass
         /// </summary>
 		private void WinState()
         {
-				//Stop the progress timer
-				EndTimeFill();
-				QuestionTimerProgressBar.Progress = 0;
+			//Stop the progress timer
+            EndTimeFill();
+            QuestionTimerProgressBar.Progress = 0;
 
             // +1 number of questions
             questionNumber++;
 
             // Calculate game score
-            int score = GameScore(questionNumber, timePassed.ElapsedMilliseconds);
+            int score = GameScore(timePassed.ElapsedMilliseconds);
 
             // Popup alert that the answer was correct
             UIAlertView correctAlert = new UIAlertView()
@@ -264,13 +265,27 @@ namespace MobileAppClass
         /// Calculates the user's current or final game score
         /// </summary>
         /// <returns>The score.</returns>
-        /// <param name="numCorrect">Number correct.</param>
-        /// <param name="secondsPassed">Seconds passed.</param>
-        private int GameScore(int numCorrect, float secondsPassed)
+        /// <param name="secondsPassed">Seconds passed during one question.</param>
+        private float GameScore(float secondsPassed, float currentScore)
         {
-            // Calculate by number_correct_ans * (150s - seconds_passed)
-            int totalScore = (int)(numCorrect * (maxTime - secondsPassed));
-            return totalScore;
+            float score = currentScore;
+
+            // Calculate based on time user answered the question
+            switch (secondsPassed)
+            {
+                case float x when (x < 15000) && (x > 14000):
+                    Console.WriteLine("case 1");
+                    score = score + 100;
+                    break;
+                case float x when (x < 15) && (x > 14):
+                    Console.WriteLine("case 2");
+                    break;
+                case float x when (x < 15) && (x > 14):
+                    Console.WriteLine("case 3");
+                    break;
+            }
+
+            return score;
         }
 
         /// <summary>
@@ -282,7 +297,7 @@ namespace MobileAppClass
             InvokeOnMainThread(() => {
 
                 // Calculate game score
-                int score = GameScore(questionNumber, timePassed.ElapsedMilliseconds);
+                int score = GameScore(timePassed.ElapsedMilliseconds);
 
                 // Popup alert that the timer is done
                 UIAlertView timeAlert = new UIAlertView()
