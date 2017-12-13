@@ -21,6 +21,7 @@ namespace MobileAppClass
 		Timer timerProgression = new Timer();
 		Stopwatch timePassed = new Stopwatch();
 		List<TriviaQuestionsRecord> ListofTriviaQuestions;
+        int answerBoxSelection;
 		readonly int maxQuestions = 15; // Maximum # of questions in game
 		readonly int maxTime = 15000; // 15 seconds counted by timer; also the time bar's timer interval
 		int questionNumber = 1; // Initialized to 1 once the game starts
@@ -168,6 +169,9 @@ namespace MobileAppClass
 		{
 			// Get a random question from the list and display it
 			int rndQuestion = RandomSelectGenerator.GetInstance().RandomQuestion(ListofTriviaQuestions.Count);
+
+
+            answerBoxSelection = RandNumGen2.AnswerBox();
 
 			QuestionLabel.Text = ListofTriviaQuestions[rndQuestion].question;
 			QuestionLabel.TextAlignment = UITextAlignment.Center;

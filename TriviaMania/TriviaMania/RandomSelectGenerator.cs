@@ -57,12 +57,12 @@ namespace MobileAppClass
         }
 
         // Returns the correct answer box
-        public int AnswerBox()
+        public static int AnswerBox()
         {
             Random rnd = new Random();
             int answerButtonNumber = rnd.Next(1, 5);
 
-            return 1;
+            return answerButtonNumber;
         }
 
         // Returns number of a random question to select from the list
