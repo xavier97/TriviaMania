@@ -35,12 +35,32 @@ namespace MobileAppClass
 				TriviaQuestionsRecord Q4 = new TriviaQuestionsRecord("How many days are in a year?", "365", "300", "465", "52");
 				TriviaQuestionsRecord Q5 = new TriviaQuestionsRecord("What is Overwatch?", "A video game", "A movie",
 																	 "A TV show", "A book");
+				TriviaQuestionsRecord Q6 = new TriviaQuestionsRecord("Test question 1", "Right answer", "wrong", "wrong", "wrong");
+				TriviaQuestionsRecord Q7 = new TriviaQuestionsRecord("Test question 1", "Right answer", "wrong", "wrong", "wrong");
+				TriviaQuestionsRecord Q8 = new TriviaQuestionsRecord("Test question 2", "Right answer", "wrong", "wrong", "wrong");
+				TriviaQuestionsRecord Q9 = new TriviaQuestionsRecord("Test question 3", "Right answer", "wrong", "wrong", "wrong");
+				TriviaQuestionsRecord Q10 = new TriviaQuestionsRecord("Test question 4", "Right answer", "wrong", "wrong", "wrong");
+				TriviaQuestionsRecord Q11 = new TriviaQuestionsRecord("Test question 5", "Right answer", "wrong", "wrong", "wrong");
+				TriviaQuestionsRecord Q12 = new TriviaQuestionsRecord("Test question 6", "Right answer", "wrong", "wrong", "wrong");
+				TriviaQuestionsRecord Q13 = new TriviaQuestionsRecord("Test question 7", "Right answer", "wrong", "wrong", "wrong");
+				TriviaQuestionsRecord Q14 = new TriviaQuestionsRecord("Test question 8", "Right answer", "wrong", "wrong", "wrong");
+				TriviaQuestionsRecord Q15 = new TriviaQuestionsRecord("Test question 9", "Right answer", "wrong", "wrong", "wrong");
 
 				StarterQuestionsList.Add(Q1);
 				StarterQuestionsList.Add(Q2);
 				StarterQuestionsList.Add(Q3);
 				StarterQuestionsList.Add(Q4);
 				StarterQuestionsList.Add(Q5);
+				StarterQuestionsList.Add(Q6);
+				StarterQuestionsList.Add(Q7);
+				StarterQuestionsList.Add(Q8);
+				StarterQuestionsList.Add(Q9);
+				StarterQuestionsList.Add(Q10);
+				StarterQuestionsList.Add(Q11);
+				StarterQuestionsList.Add(Q12);
+				StarterQuestionsList.Add(Q13);
+				StarterQuestionsList.Add(Q14);
+				StarterQuestionsList.Add(Q15);
 
 				//Write everything to the file
 				var myJson = JsonConvert.SerializeObject(StarterQuestionsList);
@@ -65,12 +85,12 @@ namespace MobileAppClass
         partial void NewGameButton_TouchUpInside(UIButton sender)
         {
 			//If there are less than 15 questions in the list, push alert
-			/*var jsonData = File.ReadAllText(AppDelegate.pathFile);
+			var jsonData = File.ReadAllText(AppDelegate.triviaPathFile);
 			if (JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData).Count < MinimumQuestions)
 			{
 				AlertMessage();
 				return;
-			}*/
+			}
 
             // Create a TriviaViewController1
             TriviaViewController1 TriviaVC = new TriviaViewController1();
