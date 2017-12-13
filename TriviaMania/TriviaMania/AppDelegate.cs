@@ -12,7 +12,8 @@ namespace MobileAppClass
     {
         // class-level declarations
 
-		public static string pathFile;
+		public static string triviaPathFile;
+		public static string highScorePathFile;
 
         public override UIWindow Window
         {
@@ -30,7 +31,9 @@ namespace MobileAppClass
 
 			var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 			Console.WriteLine(path);
-			pathFile = Path.Combine(path, "TriviaQuestionsData.txt");
+			triviaPathFile = Path.Combine(path, "TriviaQuestionsData.txt");
+			highScorePathFile = Path.Combine(path, "HighScoreData.txt");
+
 
 			//Create Navigation Controller
 			UINavigationController navCtrl = new UINavigationController(new MyViewController());

@@ -23,7 +23,7 @@ namespace MobileAppClass
 			NavigationItem.Title = "Trivia Mania";
 			NavigationController.NavigationBar.BackgroundColor = UIColor.Purple;
 
-			if (File.Exists(AppDelegate.pathFile) == false)
+			if (File.Exists(AppDelegate.triviaPathFile) == false)
 			{
 				//Starter Questions
 				TriviaQuestionsRecord Q1 = new TriviaQuestionsRecord("Which body of land is not a contient?",

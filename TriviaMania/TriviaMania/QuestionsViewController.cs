@@ -67,7 +67,7 @@ namespace MobileAppClass
 			public QuestionsTableSource(QuestionsViewController vc_in)
 			{
 				//Json file is deserialized and added it to a list
-				var jsonData = File.ReadAllText(AppDelegate.pathFile);
+				var jsonData = File.ReadAllText(AppDelegate.triviaPathFile);
 				ListofTriviaQuestions = JsonConvert.DeserializeObject<List<TriviaQuestionsRecord>>(jsonData);
 
 				vc = vc_in;
@@ -136,7 +136,7 @@ namespace MobileAppClass
 						//Save changes to json file
 						var myJson = JsonConvert.SerializeObject(ListofTriviaQuestions);
 
-						using (var streamwriter = new StreamWriter(AppDelegate.pathFile, false))
+						using (var streamwriter = new StreamWriter(AppDelegate.triviaPathFile, false))
 						{
 							streamwriter.Write(myJson);
 						}
