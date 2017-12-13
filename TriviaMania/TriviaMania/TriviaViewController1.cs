@@ -25,7 +25,7 @@ namespace MobileAppClass
 		readonly int maxQuestions = 15; // Maximum # of questions in game
 		readonly int maxTime = 15000; // 15 seconds counted by timer; also the time bar's timer interval
 		int questionNumber = 1; // Initialized to 1 once the game starts
-		float currentScore = 0; // The user's current score. They start with 0.
+		int currentScore = 0; // The user's current score. They start with 0.
 
 		public TriviaViewController1() : base("TriviaViewController1", null)
 		{

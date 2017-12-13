@@ -71,6 +71,27 @@ namespace MobileAppClass
 				}
 			}
 
+			if (File.Exists(AppDelegate.highScorePathFile) == false)
+			{
+				Console.WriteLine("make file");
+				//Write everything to the file
+				var myJson = JsonConvert.SerializeObject(0);
+
+				using (var streamwriter = new StreamWriter(AppDelegate.highScorePathFile, false))
+				{
+					streamwriter.Write(myJson);
+				}
+			}
+
+		}
+
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(animated);
+
+			//Deserialize json file and add it to a list
+			var jsonData = File.ReadAllText(AppDelegate.highScorePathFile);
+			HighScoreLabel.Text = "High score: " + JsonConvert.DeserializeObject(jsonData);
 		}
 
         partial void ViewQuestionsButton_TouchUpInside(UIButton sender)
