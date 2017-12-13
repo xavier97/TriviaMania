@@ -123,12 +123,17 @@
       <DependentUpon>EnterDataViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="RandomSelectGenerator.cs" />
+    <Compile Include="WinViewController.cs" />
+    <Compile Include="WinViewController.designer.cs">
+      <DependentUpon>WinViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MyViewController.xib" />
     <InterfaceDefinition Include="QuestionsViewController.xib" />
     <InterfaceDefinition Include="TriviaViewController1.xib" />
     <InterfaceDefinition Include="EnterDataViewController.xib" />
+    <InterfaceDefinition Include="WinViewController.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

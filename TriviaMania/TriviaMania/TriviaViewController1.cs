@@ -227,36 +227,32 @@ namespace MobileAppClass
             // Popup alert that the answer was correct
             UIAlertView correctAlert = new UIAlertView()
             {
-                Title = "Correct!",
-                Message = "Current Score: " + score
-            };
-            correctAlert.AddButton("OK");
-            correctAlert.Show();
+				Title = "Correct!",
+				Message = "Current Score: " + score
+			};
+			correctAlert.AddButton("OK");
+			correctAlert.Show();
 
-            // Win game if 15+ questions beaten
-            if (questionNumber > maxQuestions)
-            {
-                correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
-                {
-                    Console.WriteLine("you win");
-                    // todo: Push "WIN" VC; just popping it for now
-                    this.NavigationController.PopViewController(true);
-                };
-            }
-            else
-            {
-                correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
-                {
+			correctAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
+			{
+				//If the user answered 15 questions
+				if (questionNumber > maxQuestions)
+				{
+					//UIViewController WinScreen = new UIViewController(new WinViewController());
+
+
+				}
+
 					//Update question number label
 					questionNumberLabel.Text = questionNumber.ToString();
 
-                    // Clear fields and display next question
-                    GameSetup();
+					// Clear fields and display next question
+					GameSetup();
 
 					//Reset time
 					BeginTimeFill();
-                };
-            }
+			};
+		}
 
         }
 

@@ -109,7 +109,7 @@ namespace MobileAppClass
 				//Save to json file
 				var myJson = JsonConvert.SerializeObject(TriviaQuestonsList);
 
-				using (var streamwriter = new StreamWriter(AppDelegate.pathFile, false))
+				using (var streamwriter = new StreamWriter(AppDelegate.triviaPathFile, false))
 				{
 					streamwriter.Write(myJson);
 				}
@@ -126,7 +126,7 @@ namespace MobileAppClass
 				//Save to json file
 				var myJson = JsonConvert.SerializeObject(TriviaQuestonsList);
 
-				using (var streamwriter = new StreamWriter(AppDelegate.pathFile, false))
+				using (var streamwriter = new StreamWriter(AppDelegate.triviaPathFile, false))
 				{
 					streamwriter.Write(myJson);
 				}
