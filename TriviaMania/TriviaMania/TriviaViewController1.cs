@@ -162,6 +162,12 @@ namespace MobileAppClass
 					streamwriter.Write(currentScore);
 				}
 			}
+
+			// Kill timers when exited
+			EndTimeFill();
+
+			// Clear questions already played list
+			testRandom.clearSelected();
 		}
 
 		public override void ViewDidDisappear(bool animated)
@@ -169,10 +175,10 @@ namespace MobileAppClass
 			base.ViewDidDisappear(animated);
 
 			// Kill timers when exited
-			EndTimeFill();
+			//EndTimeFill();
 
             // Clear questions already played list
-            testRandom.clearSelected();
+            //testRandom.clearSelected();
 		}
 
 		public override void DidReceiveMemoryWarning()
