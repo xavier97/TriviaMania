@@ -73,13 +73,10 @@ namespace MobileAppClass
 
 			if (File.Exists(AppDelegate.highScorePathFile) == false)
 			{
-				Console.WriteLine("make file");
 				//Write everything to the file
-				var myJson = JsonConvert.SerializeObject(0);
-
 				using (var streamwriter = new StreamWriter(AppDelegate.highScorePathFile, false))
 				{
-					streamwriter.Write(myJson);
+					streamwriter.Write(0);
 				}
 			}
 
@@ -117,7 +114,8 @@ namespace MobileAppClass
             TriviaViewController1 TriviaVC = new TriviaViewController1();
 
             // Display TriviaVC
-            NavigationController.PushViewController(TriviaVC, true);
+            //NavigationController.PushViewController(TriviaVC, true);
+			this.PresentViewController(TriviaVC, true, null);
         }
 
         public override void DidReceiveMemoryWarning()

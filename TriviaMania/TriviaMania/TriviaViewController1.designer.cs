@@ -32,6 +32,22 @@ namespace MobileAppClass
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel congratulationsLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel displayHighScoreLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel finalScoreLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel highScoreLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel QuestionLabel { get; set; }
 
         [Outlet]
@@ -40,7 +56,19 @@ namespace MobileAppClass
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel QuestionNumberLabel2 { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIProgressView QuestionTimerProgressBar { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton returnHomeButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel yourScoreLabel { get; set; }
 
         [Action ("AnswerButton1_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -57,6 +85,10 @@ namespace MobileAppClass
         [Action ("AnswerButton4_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void AnswerButton4_TouchUpInside (UIKit.UIButton sender);
+
+        [Action ("ReturnHomeButton_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void ReturnHomeButton_TouchUpInside (UIKit.UIButton sender);
 
         void ReleaseDesignerOutlets ()
         {
@@ -80,6 +112,26 @@ namespace MobileAppClass
                 AnswerButton4 = null;
             }
 
+            if (congratulationsLabel != null) {
+                congratulationsLabel.Dispose ();
+                congratulationsLabel = null;
+            }
+
+            if (displayHighScoreLabel != null) {
+                displayHighScoreLabel.Dispose ();
+                displayHighScoreLabel = null;
+            }
+
+            if (finalScoreLabel != null) {
+                finalScoreLabel.Dispose ();
+                finalScoreLabel = null;
+            }
+
+            if (highScoreLabel != null) {
+                highScoreLabel.Dispose ();
+                highScoreLabel = null;
+            }
+
             if (QuestionLabel != null) {
                 QuestionLabel.Dispose ();
                 QuestionLabel = null;
@@ -90,9 +142,24 @@ namespace MobileAppClass
                 questionNumberLabel = null;
             }
 
+            if (QuestionNumberLabel2 != null) {
+                QuestionNumberLabel2.Dispose ();
+                QuestionNumberLabel2 = null;
+            }
+
             if (QuestionTimerProgressBar != null) {
                 QuestionTimerProgressBar.Dispose ();
                 QuestionTimerProgressBar = null;
+            }
+
+            if (returnHomeButton != null) {
+                returnHomeButton.Dispose ();
+                returnHomeButton = null;
+            }
+
+            if (yourScoreLabel != null) {
+                yourScoreLabel.Dispose ();
+                yourScoreLabel = null;
             }
         }
     }

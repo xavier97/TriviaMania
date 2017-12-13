@@ -14,6 +14,7 @@ namespace MobileAppClass
 
 		public static string triviaPathFile;
 		public static string highScorePathFile;
+		//public static bool returningFromTriviaVC = false;
 
         public override UIWindow Window
         {
