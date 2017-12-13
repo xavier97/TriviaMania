@@ -92,9 +92,12 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Explosion.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Explosion.imageset\Explosion-clip-art-tumundografico-3.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Assets.xcassets\Explosion.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

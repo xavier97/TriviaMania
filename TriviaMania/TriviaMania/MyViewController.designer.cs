@@ -20,10 +20,6 @@ namespace MobileAppClass
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel LogoLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton NewGameButton { get; set; }
 
         [Outlet]
@@ -43,11 +39,6 @@ namespace MobileAppClass
             if (HighScoreLabel != null) {
                 HighScoreLabel.Dispose ();
                 HighScoreLabel = null;
-            }
-
-            if (LogoLabel != null) {
-                LogoLabel.Dispose ();
-                LogoLabel = null;
             }
 
             if (NewGameButton != null) {

@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyViewController">
             <connections>
                 <outlet property="HighScoreLabel" destination="147" id="name-outlet-147"/>
-                <outlet property="LogoLabel" destination="5" id="name-outlet-5"/>
                 <outlet property="NewGameButton" destination="152" id="name-outlet-152"/>
                 <outlet property="ViewQuestionsButton" destination="154" id="name-outlet-154"/>
                 <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
@@ -19,28 +18,18 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trivia Mania, 300x300" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5" misplaced="YES">
-                    <rect key="frame" x="57" y="69" width="300" height="300"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="300" id="144"/>
-                        <constraint firstAttribute="height" constant="300" id="145"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="147" misplaced="YES">
-                    <rect key="frame" x="105" y="394" width="205" height="50"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="147">
+                    <rect key="frame" x="198" y="388" width="205" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="205" id="150"/>
                         <constraint firstAttribute="height" constant="50" id="151"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="152" misplaced="YES">
-                    <rect key="frame" x="100" y="465" width="215" height="40"/>
+                    <rect key="frame" x="192" y="455" width="215" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="215" id="331"/>
                         <constraint firstAttribute="height" constant="40" id="332"/>
@@ -59,7 +48,7 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="154" misplaced="YES">
-                    <rect key="frame" x="100" y="526" width="215" height="40"/>
+                    <rect key="frame" x="192" y="516" width="215" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="215" id="334"/>
                         <constraint firstAttribute="height" constant="40" id="335"/>
@@ -77,18 +66,52 @@
                         <action selector="ViewQuestionsButton_TouchUpInside:" destination="-1" id="2625" eventType="touchUpInside"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="2655" translatesAutoresizingMaskIntoConstraints="NO" image="Explosion">
+                    <rect key="frame" x="150" y="65" width="300" height="300"/>
+                    <constraints>
+                        <constraint id="2660" firstItem="2655" firstAttribute="width" constant="300"/>
+                        <constraint id="2661" firstItem="2655" firstAttribute="height" constant="300"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trivia Mania!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2662" translatesAutoresizingMaskIntoConstraints="NO">
+                    <rect key="frame" x="176" y="216" width="248" height="35"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="34" weight="heavy"/>
+                    <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                    <nil key="highlightedColor"/>
+                    <constraints>
+                        <constraint id="2665" firstItem="2662" firstAttribute="width" constant="248"/>
+                        <constraint id="2666" firstItem="2662" firstAttribute="height" constant="35"/>
+                    </constraints>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By: Nick and Xavier" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2674" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                    <rect key="frame" x="202" y="564" width="197" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                    <nil key="highlightedColor"/>
+                    <constraints>
+                        <constraint id="2677" firstItem="2674" firstAttribute="width" constant="197"/>
+                        <constraint id="2678" firstItem="2674" firstAttribute="height" constant="21"/>
+                    </constraints>
+                </label>
             </subviews>
             <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.66274509803921566" green="0.33333333333333331" blue="0.9882352941176471" alpha="1"/>
             <constraints>
-                <constraint firstItem="5" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="143"/>
-                <constraint firstItem="5" firstAttribute="top" secondItem="2" secondAttribute="top" constant="69" id="146"/>
-                <constraint firstItem="147" firstAttribute="top" secondItem="5" secondAttribute="bottom" constant="25" id="148"/>
                 <constraint firstItem="147" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="149"/>
                 <constraint firstItem="152" firstAttribute="top" secondItem="147" secondAttribute="bottom" constant="21" id="329"/>
                 <constraint firstItem="152" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="330"/>
                 <constraint firstItem="154" firstAttribute="top" secondItem="152" secondAttribute="bottom" constant="21" id="333"/>
                 <constraint firstItem="154" firstAttribute="centerX" secondItem="2" secondAttribute="centerX" id="336"/>
+                <constraint id="2658" firstItem="2655" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="2659" firstItem="2655" firstAttribute="top" secondItem="2" secondAttribute="top" constant="65"/>
+                <constraint id="2663" firstItem="2662" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="2664" firstItem="2662" firstAttribute="top" secondItem="2" secondAttribute="top" constant="216"/>
+                <constraint id="2669" firstItem="147" firstAttribute="top" secondItem="2662" secondAttribute="centerY" constant="154"/>
+                <constraint id="2675" firstItem="2674" firstAttribute="centerX" secondItem="2" secondAttribute="centerX"/>
+                <constraint id="2676" firstItem="2674" firstAttribute="top" secondItem="154" secondAttribute="centerY" constant="28"/>
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="Explosion" width="600" height="602"/>
+    </resources>
 </document>

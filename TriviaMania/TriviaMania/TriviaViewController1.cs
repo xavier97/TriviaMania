@@ -313,39 +313,9 @@ namespace MobileAppClass
             alert.Show();
 
             alert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
-            {
-                //If the user answered 15 questions
-                if (questionNumber > maxQuestions)
-                {
-					finalScoreLabel.Text = currentScore.ToString();
-
-					QuestionLabel.Hidden = true;
-					QuestionTimerProgressBar.Hidden = true;
-					AnswerButton1.Hidden = true;
-					AnswerButton2.Hidden = true;
-					AnswerButton3.Hidden = true;
-					AnswerButton4.Hidden = true;
-					questionNumberLabel.Hidden = true;
-					QuestionNumberLabel2.Hidden = true;
-
-					returnHomeButton.SetTitle("Home", UIControlState.Normal);
-					congratulationsLabel.Hidden = false;
-					highScoreLabel.Hidden = false;
-					displayHighScoreLabel.Hidden = false;
-					yourScoreLabel.Hidden = false;
-					finalScoreLabel.Hidden = false;
-                }
-                else
-                {
-                    // Update question number label
-                    questionNumberLabel.Text = questionNumber.ToString();
-
-                    // Clear fields and display next question
-                    GameSetup();
-
-                    //Reset time
-                    BeginTimeFill();
-                }
+			{
+				//Continues to the next question or completes the game if no more questions
+				ourBSMethod();
             };
 		}
 
@@ -444,6 +414,12 @@ namespace MobileAppClass
                 // Calculate game score; Point loss for running out of time
                 GameScore(timePassed.ElapsedMilliseconds, false);
 
+				//Stop the progress timer
+				EndTimeFill();
+
+				// +1 number of questions
+				questionNumber++;
+
 				// Popup alert that the timer is done
 				UIAlertView timeAlert = new UIAlertView()
 				{
@@ -453,11 +429,10 @@ namespace MobileAppClass
 				timeAlert.AddButton("OK");
 				timeAlert.Show();
 
-                // TODO: When user acknowledges they lost, show next queston
 				timeAlert.WillDismiss += (object sender2, UIButtonEventArgs e2) =>
 				{
-					this.NavigationController.PopViewController(true);
-					QuestionTimerProgressBar.SetProgress(0, false);
+					//Continues to the next question or completes the game if no more questions
+					ourBSMethod();
 				};
 			});
 
@@ -475,6 +450,42 @@ namespace MobileAppClass
 			{
 				QuestionTimerProgressBar.Progress = QuestionTimerProgressBar.Progress + 0.07f;
 			});
+		}
+
+		private void ourBSMethod()
+		{
+			//If the user answered 15 questions
+                if (questionNumber > maxQuestions)
+                {
+					finalScoreLabel.Text = currentScore.ToString();
+
+					QuestionLabel.Hidden = true;
+					QuestionTimerProgressBar.Hidden = true;
+					AnswerButton1.Hidden = true;
+					AnswerButton2.Hidden = true;
+					AnswerButton3.Hidden = true;
+					AnswerButton4.Hidden = true;
+					questionNumberLabel.Hidden = true;
+					QuestionNumberLabel2.Hidden = true;
+
+					returnHomeButton.SetTitle("Home", UIControlState.Normal);
+					congratulationsLabel.Hidden = false;
+					highScoreLabel.Hidden = false;
+					displayHighScoreLabel.Hidden = false;
+					yourScoreLabel.Hidden = false;
+					finalScoreLabel.Hidden = false;
+                }
+                else
+                {
+                    // Update question number label
+                    questionNumberLabel.Text = questionNumber.ToString();
+
+					// Clear fields and display next question
+					GameSetup();
+
+					//Reset time
+					BeginTimeFill();
+                }
 		}
 	}
 }

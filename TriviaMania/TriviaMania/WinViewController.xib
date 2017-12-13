@@ -99,4 +99,7 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="Explosion" width="600" height="602"/>
+    </resources>
 </document>

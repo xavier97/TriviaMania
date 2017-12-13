@@ -245,4 +245,7 @@
             <point key="canvasLocation" x="32" y="28"/>
         </view>
     </objects>
+    <resources>
+        <image name="Explosion" width="600" height="602"/>
+    </resources>
 </document>

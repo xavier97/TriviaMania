@@ -20,7 +20,7 @@ namespace MobileAppClass
 			base.ViewDidLoad();
 
 			//Add navigation bar title
-			NavigationItem.Title = "Trivia Mania";
+			//NavigationItem.Title = "Trivia Mania";
 			NavigationController.NavigationBar.BackgroundColor = UIColor.Purple;
 
 			if (File.Exists(AppDelegate.triviaPathFile) == false)
@@ -35,16 +35,19 @@ namespace MobileAppClass
 				TriviaQuestionsRecord Q4 = new TriviaQuestionsRecord("How many days are in a year?", "365", "300", "465", "52");
 				TriviaQuestionsRecord Q5 = new TriviaQuestionsRecord("What is Overwatch?", "A video game", "A movie",
 																	 "A TV show", "A book");
-				TriviaQuestionsRecord Q6 = new TriviaQuestionsRecord("Test question 1", "Right answer", "wrong", "wrong", "wrong");
-				TriviaQuestionsRecord Q7 = new TriviaQuestionsRecord("Test question 1", "Right answer", "wrong", "wrong", "wrong");
-				TriviaQuestionsRecord Q8 = new TriviaQuestionsRecord("Test question 2", "Right answer", "wrong", "wrong", "wrong");
-				TriviaQuestionsRecord Q9 = new TriviaQuestionsRecord("Test question 3", "Right answer", "wrong", "wrong", "wrong");
-				TriviaQuestionsRecord Q10 = new TriviaQuestionsRecord("Test question 4", "Right answer", "wrong", "wrong", "wrong");
-				TriviaQuestionsRecord Q11 = new TriviaQuestionsRecord("Test question 5", "Right answer", "wrong", "wrong", "wrong");
-				TriviaQuestionsRecord Q12 = new TriviaQuestionsRecord("Test question 6", "Right answer", "wrong", "wrong", "wrong");
-				TriviaQuestionsRecord Q13 = new TriviaQuestionsRecord("Test question 7", "Right answer", "wrong", "wrong", "wrong");
-				TriviaQuestionsRecord Q14 = new TriviaQuestionsRecord("Test question 8", "Right answer", "wrong", "wrong", "wrong");
-				TriviaQuestionsRecord Q15 = new TriviaQuestionsRecord("Test question 9", "Right answer", "wrong", "wrong", "wrong");
+				TriviaQuestionsRecord Q6 = new TriviaQuestionsRecord("Which is not a Pokemon?", "Maurosaur", "Squirtle", "Mewtwo", "Pikachu");
+				TriviaQuestionsRecord Q7 = new TriviaQuestionsRecord("What is the capitol of China?", "Beijing", "Shanghai", "Tokyo", "Washington DC");
+				TriviaQuestionsRecord Q8 = new TriviaQuestionsRecord("What in not a monster from Monster Hunter?", 
+				                                                     "Groudon", "Rathalos", "Lagiacrus", "Gore Magala");
+				TriviaQuestionsRecord Q9 = new TriviaQuestionsRecord("How many Oceans are there?", "5", "7", "10", "1");
+				TriviaQuestionsRecord Q10 = new TriviaQuestionsRecord("Who's the secretary of state?", "Rex Tillerson", "Obama", "Bilitski", "Jeff Sessions");
+				TriviaQuestionsRecord Q11 = new TriviaQuestionsRecord("Who was the first Nasa astronaut to visit space twice?", 
+				                                                      "Gus Grissom", "Neil Armstrong", "Franz Viehbock", "Bilitski");
+				TriviaQuestionsRecord Q12 = new TriviaQuestionsRecord("2 + 2 = ?", "4", "3", "5", "Math is hard");
+				TriviaQuestionsRecord Q13 = new TriviaQuestionsRecord("What is the sixth planet from the sun?", "Saturn", "Jupiter", "Earth", "There are only 5 planets");
+				TriviaQuestionsRecord Q14 = new TriviaQuestionsRecord("When was the movie It's a Wonderful Life released?", "1946", "1949", "1996", "1962");
+				TriviaQuestionsRecord Q15 = new TriviaQuestionsRecord("What is the correct way to write to the console in C#", 
+				                                                      "Console.WriteLine(\"Hello\");", "Put(\"Hello\");", "cout << \"Hello\";", "System.PrintLn(\"Hello\");");
 
 				StarterQuestionsList.Add(Q1);
 				StarterQuestionsList.Add(Q2);
