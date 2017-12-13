@@ -93,6 +93,16 @@ namespace MobileAppClass
 
 		private void IncorrectAlert()
 		{
+            //Stop the progress timer
+            EndTimeFill();
+            QuestionTimerProgressBar.Progress = 0;
+
+            // +1 number of questions
+            questionNumber++;
+
+            // Calculate game score
+            float score = GameScore(timePassed.ElapsedMilliseconds);
+
 			// Point loss for getting it wrong
 			if (currentScore >= 100)
 			{
@@ -107,6 +117,12 @@ namespace MobileAppClass
 			};
 			incorrectAlert.AddButton("OK");
 			incorrectAlert.Show();
+
+            // On dismiss, show next question
+            incorrectAlert.Dismissed += (object sender, UIButtonEventArgs e) =>
+            {
+                GameSetup();
+            };
 		}
 
 		public override void ViewDidLoad()
@@ -169,7 +185,6 @@ namespace MobileAppClass
 		{
 			// Get a random question from the list and display it
 			int rndQuestion = RandomSelectGenerator.GetInstance().RandomQuestion(ListofTriviaQuestions.Count);
-
 
             answerBoxSelection = RandNumGen2.AnswerBox();
 
@@ -263,7 +278,6 @@ namespace MobileAppClass
 			questionNumber++;
 
 			// Calculate game score
-			Console.WriteLine(timePassed.ElapsedMilliseconds);
 			float score = GameScore(timePassed.ElapsedMilliseconds);
 
 			// Popup alert that the answer was correct
